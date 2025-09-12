@@ -25,7 +25,7 @@ const Hero = () => {
           </div>
         </div>
         <RedSpot cl='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' />
-        <div className="relative">
+        <div className="relative mr-4">
           <Image
             src={HeroImg}
             alt="Hero Image"
@@ -34,32 +34,32 @@ const Hero = () => {
             // height={545}
           />
           <div className="absolute flex items-center justify-center gap-2 p-2 top-7 -right-3 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
-            <PiStarFourFill />
+            <PiStarFourFill className='icon' />
             <p className='text-sm text-white font-bold'>AI Analysis Active </p>
           </div>
           <div className="absolute flex items-center justify-center gap-2 p-2 bottom-5 -left-7 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
-            <IoFlash />
+            <IoFlash className='icon' />
             <p className='text-sm text-white font-bold'>Structural Integrity: 98%</p>
           </div>
         </div>
       </section>
 
-      <div className="bg-primary-900 border-t border-t-primary-800 mt-32 min-w-screen p-5">
+      <div className="bg-primary-900 border-t border-t-primary-800 mt-32 min-w-full p-5">
         <div className="container mx-auto flex justify-between items-center flex-wrap gap-5">
           <div className="flex gap-2 items-start justify-center">
-            <HiOutlineCpuChip className='w-6 h-6 text-secondary-500'/>
+            <HiOutlineCpuChip className='icon'/>
             <p className='text-lg text-white font-bold'>AI-Powered Design Tools</p>
           </div>
           <div className="flex gap-2 items-start justify-center">
-            <GoPeople  className='w-6 h-6 text-secondary-500'/>
+            <GoPeople  className='icon'/>
             <p className='text-lg text-white font-bold'>Collaborative Studios</p>
           </div>
           <div className="flex gap-2 items-center justify-center">
-            <GoVerified className='w-6 h-6 text-secondary-500'/>
+            <GoVerified className='icon'/>
             <p className='text-lg text-white font-bold'>Industry Certification</p>
           </div>
           <div className="flex gap-2 items-center justify-center">
-            <SlGlobe className='w-6 h-6 text-secondary-500'/>
+            <SlGlobe className='icon'/>
             <p className='text-lg text-white font-bold'>Arabic-First Education</p>
           </div>
         </div>

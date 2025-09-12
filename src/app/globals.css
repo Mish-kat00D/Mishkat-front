@@ -114,3 +114,7 @@ body {
   color: var(--foreground);
   font-family: 'Sen', sans-serif;
 }
+
+.icon {
+  @apply w-6 h-6 text-secondary-500
+}
