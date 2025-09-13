@@ -1,6 +1,7 @@
 import React from 'react'
 import { GoPeople } from 'react-icons/go'
 import { IoLayers } from 'react-icons/io5'
+import SectionHeader from './SectionHeader'
 
 const About = () => {
   const CardsData = [
@@ -22,18 +23,13 @@ const About = () => {
   ]
   return (
     <section id="about" className="min-w-full mt-40">
-      <div className="container mx-auto flex flex-col justify-start items-center gap-12"></div>
-      <div className="flex flex-col justify-start items-center gap-6">
-          <div className="w-full flex flex-col justify-start items-center gap-2">
-              <div className="justify-start text-white text-4xl md:text-6xl font-bold font-['Sen']">What is Mishkat?</div>
-              <div className="w-72 h-0 outline-[5px] outline-offset-[-2.50px] outline-secondary-500" />
-          </div>
-          <div className="text-center justify-start text-neutral-300 text-xl font-normal font-['Sen'] leading-loose">A revolutionary platform merging architectural education with artifical intelligence to create the next generation of design professionals.</div>
-      </div>
-      <div className="container mx-auto flex justify-between items-center gap-4">
-        {CardsData.map((card, index) => (
-          <AboutCard key={index} icon={card.icon} title={card.title} description={card.description} />
-        ))}
+      <div className="container mx-auto flex flex-col justify-start items-center gap-12">
+        <SectionHeader title="What is Mishkat?" description="A revolutionary platform merging architectural education with artifical intelligence to create the next generation of design professionals." />
+        <div className="container mx-auto flex justify-between items-center gap-4">
+          {CardsData.map((card, index) => (
+            <AboutCard key={index} icon={card.icon} title={card.title} description={card.description} />
+          ))}
+        </div>
       </div>
     </section>
   )
