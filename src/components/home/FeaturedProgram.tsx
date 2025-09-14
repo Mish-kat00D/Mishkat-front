@@ -33,7 +33,7 @@ const FeaturedProgram = () => {
     
     return (
         <section
-        id="program"
+        id="programs"
         className="min-w-full mt-20 py-10 bg-[#050633]/50 shadow-[0_0px_4px_0px_rgba(0,0,0,0.4)]"
         >
             <div className="container mx-auto flex max-lg:flex-col justify-between items-center gap-5 px-2">

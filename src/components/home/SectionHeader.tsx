@@ -7,7 +7,7 @@ const SectionHeader = ({title, description}: {title: string, description: string
         <div className="justify-start text-center text-white text-4xl md:text-6xl font-bold font-['Sen']">{title}</div>
         <div className="w-32 h-1 rounded-full! bg-secondary-500" />
       </div>
-      <div className="text-center justify-start text-neutral-300 text-xl font-normal font-['Sen'] leading-loose">{description}</div>
+      <div className="text-center justify-start text-neutral-300 text-xl font-normal font-['Sen'] leading-loose lg:max-w-3/4">{description}</div>
     </div>
   )
 }

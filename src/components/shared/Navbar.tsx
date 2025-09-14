@@ -13,7 +13,7 @@ const Navbar = () => {
   const navItems = ['Programs', 'Courses', 'Community', 'About'];
 
   return (
-    <div className="w-full position-sticky px-14 py-3.5 bg-primary-900 text-red-700 flex justify-between items-center overflow-hidden">
+    <div className="w-full position-fixed top-0 h-[90px] px-14 py-3.5 bg-primary-900 text-red-700 flex justify-between items-center overflow-hidden">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex justify-center items-center gap-4">
             <Link href="/" className="flex justify-center items-center gap-2">

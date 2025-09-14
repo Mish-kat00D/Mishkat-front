@@ -40,7 +40,7 @@ export default function Footer() {
               intelligence to empower the next generation of designers.
             </p>
 
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-2 px-1 w-full">
               <span className="text-neutral-100 text-base font-semibold">
                 Subscribe to our newsletter
               </span>
@@ -48,7 +48,7 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 px-4 py-3 bg-primary-900 rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.40)] outline-1 outline-indigo-300/10 text-neutral-600 text-xs"
+                  className="flex-1 px-4 py-3 bg-primary-900 rounded-lg outline-1 outline-indigo-300/10 text-neutral-600 text-xs"
                 />
                 <button className="h-9 px-4 bg-secondary-500 rounded-lg text-white text-sm font-medium">
                   Subscribe
