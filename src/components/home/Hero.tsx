@@ -17,19 +17,19 @@ const Hero = () => {
             <span className='w-8 h-1 bg-secondary-500'></span>
             <p className='text-secondary-500 text-lg'>MISHKAT PLATFORM</p>
           </div>
-          <h1 className='text-4xl md:text-6xl text-white font-bold'>Build the Future of Design with AI</h1>
-          <p className='text-xl text-neutral-400'>Mishkat offers immersive AI-powered design education, real architectural studio experiences, and tools for the next generation of architects.</p>
-          <div className="flex justify-start items-center gap-4">
-            <button className='bg-secondary-500 text-white text-lg px-8 py-2 rounded-7'>Join the Studio Program</button>
-            <button className='border border-neutral-100 text-neutral-100 text-lg px-8 py-2 rounded-7'>Explore Courses</button>
+          <h1 className='text-4xl md:text-6xl text-white font-bold max-md:text-center'>Build the Future of Design with AI</h1>
+          <p className='text-xl text-neutral-400 max-md:text-center'>Mishkat offers immersive AI-powered design education, real architectural studio experiences, and tools for the next generation of architects.</p>
+          <div className="flex justify-start items-center gap-4 max-md:flex-col max-md:justify-center max-md:w-full">
+            <button className='bg-secondary-500 hover:bg-secondary-700 text-white text-lg px-8 py-2 rounded-7'>Join the Studio Program</button>
+            <button className='border border-neutral-100 text-neutral-100 hover:bg-secondary-20 text-lg px-8 py-2 rounded-7'>Explore Courses</button>
           </div>
         </div>
         <RedSpot cl='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' />
-        <div className="relative mr-4">
+        <div className="relative max-md:mx-auto mr-4">
           <Image
             src={HeroImg}
             alt="Hero Image"
-            className="w-[342px] h-[382] md:w-[488px] md:h-[507px] lg:h-[545px] rounded-2xl object-cover"
+            className="w-[270px] h-[382] md:w-[488px] md:h-[507px] lg:h-[545px] rounded-2xl object-cover"
             // width={524}
             // height={545}
           />
@@ -45,7 +45,7 @@ const Hero = () => {
       </section>
 
       <div className="bg-primary-900 border-t border-t-primary-800 mt-32 min-w-full p-5">
-        <div className="container mx-auto flex justify-between items-center flex-wrap gap-5">
+        <div className="container mx-auto flex justify-between items-center max-md:justify-center flex-wrap gap-5">
           <div className="flex gap-2 items-start justify-center">
             <HiOutlineCpuChip className='icon'/>
             <p className='text-lg text-white font-bold'>AI-Powered Design Tools</p>

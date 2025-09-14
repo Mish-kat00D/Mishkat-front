@@ -25,7 +25,7 @@ const About = () => {
     <section id="about" className="min-w-full mt-40">
       <div className="container mx-auto flex flex-col justify-start items-center gap-12">
         <SectionHeader title="What is Mishkat?" description="A revolutionary platform merging architectural education with artifical intelligence to create the next generation of design professionals." />
-        <div className="container mx-auto flex justify-between items-center gap-4">
+        <div className="container mx-auto flex justify-between items-center flex-wrap gap-4">
           {CardsData.map((card, index) => (
             <AboutCard key={index} icon={card.icon} title={card.title} description={card.description} />
           ))}
@@ -37,7 +37,7 @@ const About = () => {
 
 const AboutCard = ({ icon, title, description }: { icon: any, title: string, description: string }) => {
   return (
-    <div className="w-96 p-4 bg-Primary-1000 rounded-2xl shadow-[0px_4px_15px_0px_rgba(0,0,0,0.40)] outline-1 outline-offset-[-1px] outline-indigo-600/20 flex flex-col justify-start items-center gap-2 overflow-hidden">
+    <div className="w-96 p-4 bg-primary-1000 rounded-2xl shadow-[0px_4px_15px_0px_rgba(0,0,0,0.40)] outline-1 outline-offset-[-1px] outline-indigo-600/20 flex flex-col justify-start items-center gap-2 overflow-hidden">
       <div className="flex flex-col justify-start items-start gap-4">
         <div className="flex flex-col justify-start items-start gap-2">
           <div className="w-9 h-9 bg-secondary-30 rounded-lg flex justify-center items-center">

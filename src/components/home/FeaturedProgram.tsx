@@ -34,9 +34,8 @@ const FeaturedProgram = () => {
     return (
         <section
         id="program"
-        className="min-w-full relative overflow-x-hidden mt-20 py-10 bg-[#050633]/50 shadow-[0_0px_4px_0px_rgba(0,0,0,0.4)]"
+        className="min-w-full mt-20 py-10 bg-[#050633]/50 shadow-[0_0px_4px_0px_rgba(0,0,0,0.4)]"
         >
-            <RedSpot cl='absolute -top-1/4 -right-1/4'/>
             <div className="container mx-auto flex max-lg:flex-col justify-between items-center gap-5 px-2">
                 <div className="flex flex-col justify-start items-start gap-8 flex-2">
                     {/* Header */}
@@ -87,23 +86,23 @@ const FeaturedProgram = () => {
                         Apply Now - limited seat
                     </button>
                 </div>
-                <div className="relative w-full flex-1">
+                <div className="relative w-full mx-auto flex-1">
                     <Image
                         src="/FeaturedProgramImg.png"
                         alt="Hero"
-                        className="rounded-3xl object-cover max-lg:w-full"
+                        className="rounded-3xl object-cover mx-auto max-lg:w-full max-md:w-[270px]"
                         width={467}
                         height={584}
                     />
-                    <div className="absolute flex items-center justify-center gap-2 p-2 top-7 -left-7 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
+                    <div className="absolute flex items-center justify-center gap-2 p-2 top-7 -left-7 max-md:-left-1 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
                         <IoFlash className='icon' />
                         <p className='text-sm text-white font-bold'>Reconstruction in Progress</p>
                     </div>
-                    <div className="absolute flex items-center justify-center gap-2 p-2 bottom-1/4 -right-7 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
+                    <div className="absolute flex items-center justify-center gap-2 p-2 bottom-1/4 -right-7 max-md:-right-1 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
                         <IoLayers className='icon' />
                         <p className='text-sm text-white font-bold'>Historical Layers: 5</p>
                     </div>
-                    <div className="absolute flex items-center justify-center gap-2 p-2 bottom-5 -left-7 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
+                    <div className="absolute flex items-center justify-center gap-2 p-2 bottom-5 -left-7 max-md:-left-1 h-9 bg-white-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 outline-1 ou  rounded-5 ">
                         <LuVideo className='icon' />
                         <div className="flex flex-col gap-1">
                             <p className='text-xs text-white font-bold'>Next Cohort</p>

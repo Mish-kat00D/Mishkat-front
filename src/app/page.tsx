@@ -1,6 +1,7 @@
 'use client';
 import { Hero, About, Community, CTA, FeaturedCourses, FeaturedProgram, Testimonials } from "@/components/home";
 import Navbar from "@/components/shared/Navbar";
+import RedSpot from "@/components/shared/RedSpot";
 import AuthProvider from "@/lib/context/AuthContext";
 
 export default function Home() {
@@ -9,204 +10,13 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
-      <FeaturedProgram />
+      <div className="relative overflow-x-clip">
+        <RedSpot cl='absolute -top-2/5 -right-1/4'/>
+        <FeaturedProgram />
+      </div>
       <FeaturedCourses />
       <Testimonials />
       <Community />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
-      <CTA />
       <CTA />
     </AuthProvider>
   );
