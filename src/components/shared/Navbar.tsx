@@ -24,7 +24,7 @@ const Navbar = () => {
           <>
             <div className="w-[463px] flex justify-start items-center gap-6">
             {navItems.map((item, index) => (
-              <NavItem key={index} text={item} href={`/${item.toLowerCase()}`} />
+              <NavItem key={index} text={item} href={`/#${item.toLowerCase()}`} />
             ))}
             </div>
             <>
