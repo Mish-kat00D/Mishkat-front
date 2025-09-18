@@ -1,31 +1,36 @@
-// Auth Context
-import { createContext, useContext, useState } from "react";
+// components/AuthProvider.tsx
+"use client";
 
-export const AuthContext = createContext<{ user: string | null, login: () => void, logout: () => void}>({ user: null, login: () => {}, logout: () => {} });
+import { createContext, useContext, useState, ReactNode } from "react";
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<string | null>(null)
-  const login = () => {
-    setUser("Ali")
-    console.log('logged in as ', user)
-  }
+type AuthUIContextType = {
+  open: (view?: "login" | "signup") => void;
+  close: () => void;
+  view: "login" | "signup";
+  isOpen: boolean;
+};
 
-  const logout = () => {
-    setUser(null)
-  }
+const AuthUIContext = createContext<AuthUIContextType | null>(null);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [view, setView] = useState<"login" | "signup">("login");
+
+  const open = (nextView: "login" | "signup" = "login") => {
+    setView(nextView);
+    setIsOpen(true);
+  };
+  const close = () => setIsOpen(false);
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthUIContext.Provider value={{ open, close, view, isOpen }}>
       {children}
-    </AuthContext.Provider>
+    </AuthUIContext.Provider>
   );
-};
+}
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within a AuthProvider");
-  }
-  return context;
+export const useAuthUI = () => {
+  const ctx = useContext(AuthUIContext);
+  if (!ctx) throw new Error("useAuthUI must be used inside <AuthProvider>");
+  return ctx;
 };
-
-export default AuthProvider;

@@ -3,7 +3,6 @@ import { Sen } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
-import AuthProvider from "@/lib/context/AuthContext";
 
 const sen = Sen({
   variable: "--font-sen",
@@ -16,8 +15,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
+  auth,
   children,
 }: Readonly<{
+  auth: React.ReactNode;
   children: React.ReactNode;
 }>) {
   return (
@@ -25,7 +26,8 @@ export default function RootLayout({
       <body
         className={`${sen.variable} ${sen.className} antialiased`}
       >
-        {/* <Navbar /> */}
+        <Navbar />
+        {auth}
         {children}
         <Footer />
       </body>
