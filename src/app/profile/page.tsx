@@ -1,8 +1,10 @@
-import React from 'react'
+import { getUser } from "@/lib/auth-server"
 
-const Page = () => {
+const Page = async () => {
+  const user = await getUser()
+
   return (
-    <div>Page</div>
+    <h1>Hi {user.name} 👀</h1>
   )
 }
 
