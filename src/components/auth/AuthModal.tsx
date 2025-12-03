@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import Modal from "../shared/Modal";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
@@ -8,32 +8,52 @@ import VerifyCodeForm from "./VerifyCodeForm";
 import ResetPasswordForm from "./ResetPassword";
 import PasswordResetSuccess from "./PasswordResetSuccess";
 
-export default function AuthModal({slug}: {slug: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success'}) {
-  const router = useRouter();
-  const action = () => {
-    switch (slug) {
+type AuthView = 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success';
+
+interface AuthModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  initialView?: AuthView;
+}
+
+export default function AuthModal({ isOpen, onClose, initialView = 'login' }: AuthModalProps) {
+  const [view, setView] = useState<AuthView>(initialView);
+
+  useEffect(() => {
+    if (isOpen) {
+      setView(initialView);
+    }
+  }, [isOpen, initialView]);
+
+  const handleSwitchView = (newView: AuthView) => {
+    setView(newView);
+  };
+
+  const renderContent = () => {
+    switch (view) {
       case 'login':
-        return <LoginForm />;
+        return <LoginForm onSwitchView={handleSwitchView} />;
       case 'signup':
-        return <SignupForm />;
+        return <SignupForm onSwitchView={handleSwitchView} />;
       case 'forget-password':
-        return <ForgotPasswordForm />;
+        return <ForgotPasswordForm onSwitchView={handleSwitchView} />;
       case 'verify-code':
-        return <VerifyCodeForm />;
+        return <VerifyCodeForm onSwitchView={handleSwitchView} />;
       case 'reset-password':
-        return <ResetPasswordForm />;
+        return <ResetPasswordForm onSwitchView={handleSwitchView} />;
       case 'reset-password-success':
-        return <PasswordResetSuccess />;
+        return <PasswordResetSuccess onSwitchView={handleSwitchView} />;
       default:
-        break;
+        return null;
     }
   };
+
   return (
     <Modal
-      isOpen={true}
-      onClose={() => router.back()}
+      isOpen={isOpen}
+      onClose={onClose}
     >
-      {action()}
+      {renderContent()}
     </Modal>
   );
 }

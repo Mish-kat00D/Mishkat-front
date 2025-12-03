@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   /* config options here */
   // hostnames
   images: {
-    domains: ["https://placehold.co", "placehold.co"],
     remotePatterns: [
       {
         protocol: "https",

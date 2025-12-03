@@ -34,10 +34,10 @@ const FeaturedCourses = () => {
   return (
     <section id="courses" className="min-w-full mt-40">
       <div className="container mx-auto flex flex-col justify-start items-center gap-12">
-        <SectionHeader title="Featured Courses" description="Discover our most popular courses designed to equip you with cutting-edge skills for the future of architecture." />
+        <SectionHeader title="Workshops" description="Design in Every Way, For Everyone" />
         <div className="container mx-auto flex max-lg:flex-col px-2 justify-between items-center lg:items-stretch gap-4">
           {CardsData.map((card, index) => (
-            <CourseCard key={index} image={card.image} title={card.title} description={card.description} link={card.link} tags={card.tags}/>
+            <CourseCard key={index} image={card.image} title={card.title} description={card.description} link={card.link} tags={card.tags} />
           ))}
         </div>
       </div>
