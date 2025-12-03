@@ -112,9 +112,10 @@ html {
 
 body {
   background: var(--background);
-  background-image: url('../../public/bg.png');
+  background-image: url('../../public/bg-2.png');
   background-repeat: repeat;
   background-attachment: scroll;
+  background-size: contain;
   color: var(--foreground);
   font-family: 'Sen', sans-serif;
 }

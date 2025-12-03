@@ -6,7 +6,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
-const SignupForm = () => {
+interface SignupFormProps {
+  onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
+}
+
+const SignupForm = ({ onSwitchView }: SignupFormProps) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -113,9 +117,9 @@ const SignupForm = () => {
 
       <div className="mt-4 flex justify-center gap-2 text-sm">
         <span className="text-neutral-400">Already have an account?</span>
-        <Link href="/auth/login" replace className="font-bold text-white hover:underline">
+        <button type="button" onClick={() => onSwitchView('login')} className="font-bold text-white hover:underline">
           Log In
-        </Link>
+        </button>
       </div>
     </div>
   );

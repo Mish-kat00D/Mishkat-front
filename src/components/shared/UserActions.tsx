@@ -1,10 +1,19 @@
 "use client";
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React, { useState } from 'react'
 import { IoNotifications } from 'react-icons/io5';
+import AuthModal from '../auth/AuthModal';
 
 const UserActions = ({ user }: { user: any }) => {
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authView, setAuthView] = useState<'login' | 'signup'>('login');
+
+  const openAuth = (view: 'login' | 'signup') => {
+    setAuthView(view);
+    setIsAuthOpen(true);
+  };
+
   return (
     <>
       {user ? (
@@ -20,14 +29,19 @@ const UserActions = ({ user }: { user: any }) => {
         </div>
       ) : (
         <div className="h-10 inline-flex justify-end items-center gap-4">
-          <Link href='/auth/login' className="px-6 py-2 rounded-[999px] outline-1 outline-offset-[-1px] outline-neutral-100 hover:bg-secondary-20 flex justify-start items-center gap-2">
+          <button onClick={() => openAuth('login')} className="px-6 py-2 rounded-[999px] outline-1 outline-offset-[-1px] outline-neutral-100 hover:bg-secondary-20 flex justify-start items-center gap-2">
             <div className="justify-start text-neutral-100 text-base font-medium font-['Sen'] leading-normal">Log in</div>
-          </Link>
-          <Link href='/auth/signup' className="px-6 py-2 bg-secondary-500 hover:bg-secondary-700 rounded-[999px] flex justify-start items-center gap-2">
+          </button>
+          <button onClick={() => openAuth('signup')} className="px-6 py-2 bg-secondary-500 hover:bg-secondary-700 rounded-[999px] flex justify-start items-center gap-2">
             <div className="justify-start text-neutral-100 text-base font-medium font-['Sen'] leading-normal">Sign Up</div>
-          </Link>
+          </button>
         </div>
       )}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        initialView={authView}
+      />
     </>
   )
 }

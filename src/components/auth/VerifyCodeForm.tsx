@@ -3,11 +3,14 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function VerifyCodeForm() {
+interface VerifyCodeFormProps {
+  onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
+}
+
+export default function VerifyCodeForm({ onSwitchView }: VerifyCodeFormProps) {
   const length = 6;
   const [code, setCode] = useState<string[]>(Array(length).fill(""));
   const inputsRef = useRef<Array<HTMLInputElement>>([]);
-  const router = useRouter();
 
   const handleChange = (value: string, index: number) => {
     if (!/^[0-9]?$/.test(value)) return; // Only digits allowed
@@ -33,7 +36,7 @@ export default function VerifyCodeForm() {
     try {
       // TODO: Replace with your backend API call
       console.log("Submitting code:", otp);
-      router.push("/auth/reset-password");
+      onSwitchView('reset-password');
     } catch (err: any) {
       console.log(err.message);
     }
@@ -83,13 +86,13 @@ export default function VerifyCodeForm() {
       {/* Back to Login */}
       <div className="mt-4 flex justify-center gap-2 text-sm">
         <span className="text-neutral-400">Remember your password?</span>
-        <Link
-          href="/auth/login"
-          replace
-          className="font-bold text-white hover:text-secondary-500"
+        <button
+          type="button"
+          onClick={() => onSwitchView('login')}
+          className="font-bold text-white hover:text-secondary-500 hover:underline"
         >
           Back to Log In
-        </Link>
+        </button>
       </div>
     </div>
   );

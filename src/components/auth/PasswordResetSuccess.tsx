@@ -1,12 +1,14 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 
-export default function PasswordResetSuccess() {
-  const router = useRouter();
+interface PasswordResetSuccessProps {
+  onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
+}
+
+export default function PasswordResetSuccess({ onSwitchView }: PasswordResetSuccessProps) {
 
   const handleOk = () => {
-    router.push("/auth/login"); // redirect to login after reset
+    onSwitchView('login'); // redirect to login after reset
   };
 
   return (

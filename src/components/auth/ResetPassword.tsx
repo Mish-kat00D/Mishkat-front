@@ -1,19 +1,21 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function ResetPasswordForm() {
+interface ResetPasswordFormProps {
+  onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
+}
+
+export default function ResetPasswordForm({ onSwitchView }: ResetPasswordFormProps) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
     }
-    router.push("/auth/reset-password-success");
+    onSwitchView('reset-password-success');
     console.log("Reset successful:", password);
   };
 
@@ -71,7 +73,7 @@ export default function ResetPasswordForm() {
       {/* Footer */}
       <div className="flex justify-center gap-2 mt-4 text-sm">
         <span className="text-neutral-400">Don’t have an account?</span>
-        <button type="button" className="text-white font-bold hover:text-secondary-500">
+        <button type="button" onClick={() => onSwitchView('signup')} className="text-white font-bold hover:text-secondary-500 hover:underline">
           Sign Up
         </button>
       </div>

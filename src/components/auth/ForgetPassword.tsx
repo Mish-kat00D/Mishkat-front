@@ -3,16 +3,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function ForgotPasswordForm() {
+interface ForgotPasswordFormProps {
+  onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
+}
+
+export default function ForgotPasswordForm({ onSwitchView }: ForgotPasswordFormProps) {
   const [email, setEmail] = useState("");
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       // TODO: Replace with your backend call for sending reset code
       console.log("Sending reset link to:", email);
-      router.push("/auth/verify-code");
+      onSwitchView('verify-code');
     } catch (err: any) {
       console.log(err.message);
     }
@@ -56,13 +59,13 @@ export default function ForgotPasswordForm() {
       {/* Back to Login */}
       <div className="mt-4 flex justify-center gap-2 text-sm">
         <span className="text-neutral-400">Remember your password?</span>
-        <Link
-          href="/auth/login"
-          replace
-          className="font-bold text-white hover:text-secondary-500"
+        <button
+          type="button"
+          onClick={() => onSwitchView('login')}
+          className="font-bold text-white hover:text-secondary-500 hover:underline"
         >
           Back to Log In
-        </Link>
+        </button>
       </div>
     </div>
   );

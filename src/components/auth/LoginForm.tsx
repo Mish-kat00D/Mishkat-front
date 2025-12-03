@@ -4,7 +4,11 @@ import { signIn } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function LoginForm() {
+interface LoginFormProps {
+  onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
+}
+
+export default function LoginForm({ onSwitchView }: LoginFormProps) {
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -75,7 +79,7 @@ export default function LoginForm() {
             required
             className="rounded-md bg-primary-900 px-3 py-2 outline-1 outline-primary-100 placeholder:text-neutral-400 focus:outline-2 focus:outline-indigo-500"
           />
-          <Link href="/auth/forget-password" className="text-sm text-white font-semibold mt-1 leading-tight text-end">Forget Password?</Link>
+          <button type="button" onClick={() => onSwitchView('forget-password')} className="text-sm text-white font-semibold mt-1 leading-tight text-end hover:underline">Forget Password?</button>
         </label>
 
         <button
@@ -88,9 +92,9 @@ export default function LoginForm() {
 
       <div className="mt-4 flex justify-center gap-2 text-sm">
         <span className="text-neutral-400">Don't have an account?</span>
-        <Link href="/auth/signup" replace className="font-bold text-white hover:text-secondary-500">
+        <button type="button" onClick={() => onSwitchView('signup')} className="font-bold text-white hover:text-secondary-500 hover:underline">
           Sign Up
-        </Link>
+        </button>
       </div>
     </div>
   );

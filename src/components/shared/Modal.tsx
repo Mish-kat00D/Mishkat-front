@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
 
 interface ModalProps {
   isOpen: boolean;
@@ -14,61 +13,54 @@ export default function Modal({
   children,
   closeOnBackdrop = true,
 }: ModalProps) {
-  const modalRef = useRef<HTMLDivElement | null>(null);
-  const lastActiveRef = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
 
-    lastActiveRef.current = document.activeElement as HTMLElement;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose?.();
-    };
-
-    document.addEventListener("keydown", onKey);
-
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      document.removeEventListener("keydown", onKey);
-      try {
-        lastActiveRef.current?.focus?.();
-      } catch {
-        // ignore
+    if (isOpen) {
+      if (!dialog.open) {
+        dialog.showModal();
       }
-    };
-  }, [isOpen, onClose]);
+    } else {
+      if (dialog.open) {
+        dialog.close();
+      }
+    }
+  }, [isOpen]);
 
-  if (!isOpen) return null;
+  const handleClose = () => {
+    onClose?.();
+  };
 
-  const modal = (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6"
-      aria-modal="true"
-      role="dialog"
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    if (!closeOnBackdrop) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const rect = dialog.getBoundingClientRect();
+    const isInDialog =
+      rect.top <= e.clientY &&
+      e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX &&
+      e.clientX <= rect.left + rect.width;
+
+    if (!isInDialog) {
+      handleClose();
+    }
+  };
+
+  return (
+    <dialog
+      ref={dialogRef}
+      className="backdrop:bg-black/50 backdrop:backdrop-blur-sm bg-transparent p-0 m-auto"
+      onCancel={handleClose}
+      onClick={handleBackdropClick}
     >
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
-        onMouseDown={(e) => {
-          if (!closeOnBackdrop) return;
-          if (e.target === e.currentTarget) onClose?.();
-        }}
-      />
-
-      {/* Children only */}
-      <div
-        ref={modalRef}
-        tabIndex={-1}
-        className="relative z-10"
-        onMouseDown={(e) => e.stopPropagation()}
-      >
+      <div className="relative z-10" onMouseDown={(e) => e.stopPropagation()}>
         {children}
       </div>
-    </div>
+    </dialog>
   );
-
-  return createPortal(modal, document.body);
 }
