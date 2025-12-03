@@ -6,6 +6,7 @@ import { FaRegClock } from "react-icons/fa";
 import { IoFlash, IoLayers } from "react-icons/io5";
 import { LuVideo } from "react-icons/lu";
 import RedSpot from "../shared/RedSpot";
+import FeaturedProgramImg from '../../../public/featuredProgramImg.png'
 
 const FeaturedProgram = () => {
     const items = [
@@ -15,12 +16,12 @@ const FeaturedProgram = () => {
             description: "Weekly sessions with industry experts",
         },
         {
-            icon: <FaRegClock  className="icon" />,
+            icon: <FaRegClock className="icon" />,
             title: "100+ Hours",
             description: "Comprehensive curriculum and hands-on projects",
         },
         {
-            icon: <CgScreen    className="icon" />,
+            icon: <CgScreen className="icon" />,
             title: "Final Showcase",
             description: "Present your work to industry professionals",
         },
@@ -30,11 +31,11 @@ const FeaturedProgram = () => {
             description: "Access to all software and AI tools needed",
         }
     ]
-    
+
     return (
         <section
-        id="programs"
-        className="min-w-full mt-20 py-10 bg-[#050633]/50 shadow-[0_0px_4px_0px_rgba(0,0,0,0.4)]"
+            id="programs"
+            className="min-w-full mt-20 py-10 bg-[#050633]/50 shadow-[0_0px_4px_0px_rgba(0,0,0,0.4)]"
         >
             <div className="container mx-auto flex max-lg:flex-col justify-between items-center gap-5 px-2">
                 <div className="flex flex-col justify-start items-start gap-8 flex-2">
@@ -61,7 +62,7 @@ const FeaturedProgram = () => {
                     {/* Features Grid */}
                     <div className="flex max-md:flex-col justify-stretch items-center max-md:w-full gap-4">
                         <div className="flex flex-col gap-4 items-center justify-center max-md:w-full min-h-full">
-                            {items.slice(0,2).map((item, index) => (
+                            {items.slice(0, 2).map((item, index) => (
                                 <FeaturedItem
                                     key={index}
                                     icon={item.icon}
@@ -128,10 +129,10 @@ const FeaturedItem = ({ icon, title, description }: { icon: ReactNode, title: st
 
             <div className="flex flex-col">
                 <div className="text-white text-base font-bold font-['Sen'] leading-normal">
-                {title}
+                    {title}
                 </div>
                 <div className="text-neutral-300 text-sm font-medium font-['Sen'] leading-tight lg:whitespace-nowrap">
-                {description}
+                    {description}
                 </div>
             </div>
         </div>
