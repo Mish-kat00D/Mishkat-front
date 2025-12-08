@@ -1,10 +1,13 @@
-import { getUser } from "@/lib/auth-server"
+import Header from '@/components/profile/Header'
+import Layout from '@/components/profile/Layout'
+import React from 'react'
 
-const Page = async () => {
-  const user = await getUser()
-
+const Page = () => {
   return (
-    <h1>Hi {user.name} 👀</h1>
+    <>
+      <Header />
+      <Layout />
+    </>
   )
 }
 

@@ -213,23 +213,37 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     return CSS.supports('backdrop-filter', 'blur(10px)');
   };
 
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
   const getContainerStyles = (): React.CSSProperties => {
-    const baseStyles: React.CSSProperties = {
+    const baseStyles = {
       ...style,
       width: typeof width === 'number' ? `${width}px` : width,
       height: typeof height === 'number' ? `${height}px` : height,
       borderRadius: `${borderRadius}px`,
-      '--glass-frost': backgroundOpacity,
-      '--glass-saturation': saturation
-    } as React.CSSProperties;
+      '--glass-frost': backgroundOpacity.toString(),
+      '--glass-saturation': saturation.toString()
+    };
 
+    if (!hydrated) {
+      // SSR-safe: no dynamic browser API
+      return baseStyles;
+    }
+
+    // After hydration → now use client-only features
     const svgSupported = supportsSVGFilters();
     const backdropFilterSupported = supportsBackdropFilter();
 
     if (svgSupported) {
       return {
         ...baseStyles,
-        background: isDarkMode ? `hsl(0 0% 0% / ${backgroundOpacity})` : `hsl(0 0% 100% / ${backgroundOpacity})`,
+        background: isDarkMode
+          ? `hsl(0 0% 0% / ${backgroundOpacity})`
+          : `hsl(0 0% 100% / ${backgroundOpacity})`,
         backdropFilter: `url(#${filterId}) saturate(${saturation})`,
         boxShadow: isDarkMode
           ? `0 0 2px 1px color-mix(in oklch, white, transparent 65%) inset,
@@ -249,52 +263,29 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
              0px 8px 24px rgba(17, 17, 26, 0.05) inset,
              0px 16px 56px rgba(17, 17, 26, 0.05) inset`
       };
-    } else {
-      if (isDarkMode) {
-        if (!backdropFilterSupported) {
-          return {
-            ...baseStyles,
-            background: 'rgba(0, 0, 0, 0.4)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: `inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
-                        inset 0 -1px 0 0 rgba(255, 255, 255, 0.1)`
-          };
-        } else {
-          return {
-            ...baseStyles,
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(12px) saturate(1.8) brightness(1.2)',
-            WebkitBackdropFilter: 'blur(12px) saturate(1.8) brightness(1.2)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: `inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
-                        inset 0 -1px 0 0 rgba(255, 255, 255, 0.1)`
-          };
-        }
-      } else {
-        if (!backdropFilterSupported) {
-          return {
-            ...baseStyles,
-            background: 'rgba(255, 255, 255, 0.4)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: `inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
-                        inset 0 -1px 0 0 rgba(255, 255, 255, 0.3)`
-          };
-        } else {
-          return {
-            ...baseStyles,
-            background: 'rgba(255, 255, 255, 0.25)',
-            backdropFilter: 'blur(12px) saturate(1.8) brightness(1.1)',
-            WebkitBackdropFilter: 'blur(12px) saturate(1.8) brightness(1.1)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: `0 8px 32px 0 rgba(31, 38, 135, 0.2),
-                        0 2px 16px 0 rgba(31, 38, 135, 0.1),
-                        inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
-                        inset 0 -1px 0 0 rgba(255, 255, 255, 0.2)`
-          };
-        }
-      }
     }
+
+    if (!backdropFilterSupported) {
+      return {
+        ...baseStyles,
+        background: isDarkMode
+          ? 'rgba(0, 0, 0, 0.4)'
+          : 'rgba(255, 255, 255, 0.4)',
+        border: isDarkMode
+          ? '1px solid rgba(255, 255, 255, 0.2)'
+          : '1px solid rgba(255, 255, 255, 0.3)',
+      };
+    }
+
+    return {
+      ...baseStyles,
+      background: isDarkMode
+        ? 'rgba(255,255,255,0.1)'
+        : 'rgba(255,255,255,0.25)',
+      backdropFilter: 'blur(12px) saturate(1.8)'
+    };
   };
+
 
   const glassSurfaceClasses =
     'relative flex items-center justify-center overflow-hidden transition-opacity duration-[260ms] ease-out';

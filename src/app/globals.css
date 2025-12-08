@@ -123,3 +123,24 @@ body {
 .icon {
   @apply w-6 h-6 text-secondary-500
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.bg-nois {
+  background-image: url('../../public/Nois.svg');
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-size: contain;
+  background-color: var(--color-neutral-10);
+}
