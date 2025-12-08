@@ -52,7 +52,7 @@ const Layout = () => {
         <div className="flex md:flex-col gap-4 max-md:m-4 md:mt-5">
           {pages.map((pg) => (
             <button key={pg} onClick={() => setPage(pg)}>
-              <p className={`flex items-center justify-between w-full border-b-2 border-b-transparent md:border-r-2 md:border-r-transparent hover:bg-secondary-10 hover:text-secondary-500 transition px-4 py-2 max-md:hover:border-b-secondary-500 md:hover:border-r-secondary-500 ${page == pg && 'bg-secondary-10 text-secondary-500 max-md:hover:border-b-secondary-500 md:hover:border-r-secondary-500'}`}><span className='flex items-center gap-2'>{renderIcon(pg)}{pg}</span><ChevronRight className='w-4 h-4 hidden md:flex' /></p>
+              <p className={`flex items-center justify-between w-full max-md:border-b-2 md:border-r-2 hover:bg-secondary-10 hover:text-secondary-500 transition px-4 py-2 max-md:hover:border-b-secondary-500 md:hover:border-r-secondary-500 ${page == pg ? 'bg-secondary-10 text-secondary-500 max-md:border-b-secondary-500 md:border-r-secondary-500' : 'max-md:border-b-transparent md:border-r-transparent'}`}><span className='flex items-center gap-2'>{renderIcon(pg)}{pg}</span><ChevronRight className='w-4 h-4 hidden md:flex' /></p>
             </button>
           ))}
         </div>
