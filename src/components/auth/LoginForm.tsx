@@ -39,7 +39,7 @@ export default function LoginForm({ onSwitchView }: LoginFormProps) {
 
       {/* Google Auth */}
       <Link
-        href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}
+        href={`${process.env.NEXT_PUBLIC_API_URL ?? 'https://api.mish-kat.org'}/auth/google`}
         className="mb-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary-1000 px-4 py-2 shadow-md outline-1 outline-indigo-600/20 transition hover:bg-primary-900"
       >
         <Image src="/Google.svg" alt="Google Logo" width={32} height={32} />
