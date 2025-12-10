@@ -4,7 +4,7 @@ import GlassSurface from '../shared/Glass'
 
 const CTA = () => {
   return (
-    <section className="mt-20">
+    <section className="mt-20 md:mt-32">
       <GlassSurface blur={20} displace={20} brightness={50} className='relative container! mx-auto px-4 h-max!' InnerClassName='flex! flex-col! items-center gap-8 p-7!'>
         {/* Title + Subtitle */}
         <div className="flex flex-col items-center gap-4 text-center md:max-w-1/2">

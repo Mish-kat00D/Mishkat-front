@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState, useId } from 'react';
+import React, { useEffect, useRef, useState, useId, useMemo, useCallback } from 'react';
 
 export interface GlassSurfaceProps {
   children?: React.ReactNode;
@@ -94,10 +94,12 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   const greenChannelRef = useRef<SVGFEDisplacementMapElement>(null);
   const blueChannelRef = useRef<SVGFEDisplacementMapElement>(null);
   const gaussianBlurRef = useRef<SVGFEGaussianBlurElement>(null);
+  const resizeTimeoutRef = useRef<NodeJS.Timeout>(null);
+  const updateFrameRef = useRef<number>(null);
 
   const isDarkMode = useDarkMode();
 
-  const generateDisplacementMap = () => {
+  const generateDisplacementMap = useCallback(() => {
     const rect = containerRef.current?.getBoundingClientRect();
     const actualWidth = rect?.width || 400;
     const actualHeight = rect?.height || 200;
@@ -123,11 +125,30 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     `;
 
     return `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
-  };
+  }, [borderRadius, borderWidth, brightness, opacity, blur, mixBlendMode, redGradId, blueGradId]);
 
-  const updateDisplacementMap = () => {
-    feImageRef.current?.setAttribute('href', generateDisplacementMap());
-  };
+  const updateDisplacementMap = useCallback(() => {
+    // Cancel any pending animation frame
+    if (updateFrameRef.current) {
+      cancelAnimationFrame(updateFrameRef.current);
+    }
+
+    // Use requestAnimationFrame for smooth updates
+    updateFrameRef.current = requestAnimationFrame(() => {
+      feImageRef.current?.setAttribute('href', generateDisplacementMap());
+    });
+  }, [generateDisplacementMap]);
+
+  // Debounced update for resize events
+  const debouncedUpdate = useCallback(() => {
+    if (resizeTimeoutRef.current) {
+      clearTimeout(resizeTimeoutRef.current);
+    }
+
+    resizeTimeoutRef.current = setTimeout(() => {
+      updateDisplacementMap();
+    }, 150);
+  }, [updateDisplacementMap]);
 
   useEffect(() => {
     updateDisplacementMap();
@@ -159,42 +180,40 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     blueOffset,
     xChannel,
     yChannel,
-    mixBlendMode
+    mixBlendMode,
+    updateDisplacementMap
   ]);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
     const resizeObserver = new ResizeObserver(() => {
-      setTimeout(updateDisplacementMap, 0);
+      debouncedUpdate();
     });
 
     resizeObserver.observe(containerRef.current);
 
     return () => {
       resizeObserver.disconnect();
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
+      if (updateFrameRef.current) {
+        cancelAnimationFrame(updateFrameRef.current);
+      }
     };
-  }, []);
+  }, [debouncedUpdate]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-
-    const resizeObserver = new ResizeObserver(() => {
-      setTimeout(updateDisplacementMap, 0);
+    if (updateFrameRef.current) {
+      cancelAnimationFrame(updateFrameRef.current);
+    }
+    updateFrameRef.current = requestAnimationFrame(() => {
+      updateDisplacementMap();
     });
+  }, [width, height, updateDisplacementMap]);
 
-    resizeObserver.observe(containerRef.current);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    setTimeout(updateDisplacementMap, 0);
-  }, [width, height]);
-
-  const supportsSVGFilters = () => {
+  const supportsSVGFilters = useMemo(() => {
     if (typeof window === 'undefined') return false;
     const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     const isFirefox = /Firefox/.test(navigator.userAgent);
@@ -206,12 +225,12 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     const div = document.createElement('div');
     div.style.backdropFilter = `url(#${filterId})`;
     return div.style.backdropFilter !== '';
-  };
+  }, [filterId]);
 
-  const supportsBackdropFilter = () => {
+  const supportsBackdropFilter = useMemo(() => {
     if (typeof window === 'undefined') return false;
     return CSS.supports('backdrop-filter', 'blur(10px)');
-  };
+  }, []);
 
   const [hydrated, setHydrated] = useState(false);
 
@@ -219,26 +238,22 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     setHydrated(true);
   }, []);
 
-  const getContainerStyles = (): React.CSSProperties => {
+  const getContainerStyles = useCallback((): React.CSSProperties => {
     const baseStyles = {
       ...style,
       width: typeof width === 'number' ? `${width}px` : width,
       height: typeof height === 'number' ? `${height}px` : height,
       borderRadius: `${borderRadius}px`,
+      transform: 'translateZ(0)',
       '--glass-frost': backgroundOpacity.toString(),
       '--glass-saturation': saturation.toString()
     };
 
     if (!hydrated) {
-      // SSR-safe: no dynamic browser API
       return baseStyles;
     }
 
-    // After hydration → now use client-only features
-    const svgSupported = supportsSVGFilters();
-    const backdropFilterSupported = supportsBackdropFilter();
-
-    if (svgSupported) {
+    if (supportsSVGFilters) {
       return {
         ...baseStyles,
         background: isDarkMode
@@ -265,7 +280,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
       };
     }
 
-    if (!backdropFilterSupported) {
+    if (!supportsBackdropFilter) {
       return {
         ...baseStyles,
         background: isDarkMode
@@ -284,8 +299,19 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
         : 'rgba(255,255,255,0.25)',
       backdropFilter: 'blur(12px) saturate(1.8)'
     };
-  };
-
+  }, [
+    style,
+    width,
+    height,
+    borderRadius,
+    backgroundOpacity,
+    saturation,
+    hydrated,
+    supportsSVGFilters,
+    supportsBackdropFilter,
+    isDarkMode,
+    filterId
+  ]);
 
   const glassSurfaceClasses =
     'relative flex items-center justify-center overflow-hidden transition-opacity duration-[260ms] ease-out';

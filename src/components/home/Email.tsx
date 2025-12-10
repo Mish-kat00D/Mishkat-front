@@ -4,14 +4,14 @@ import GlassSurface from "../shared/Glass";
 
 const Email = () => {
   return (
-    <div className="w-full mt-24">
+    <div className="w-full mt-20 md:mt-32">
       <GlassSurface blur={20} displace={20} brightness={50} className='relative container! mx-auto px-4 h-max!' InnerClassName='flex! flex-col! items-center gap-8 p-7!'>
         <div className="flex flex-col justify-evenly items-center gap-8">
           <div className="text-center text-white text-4xl font-bold leading-10">
             Share your email to be updated with upcoming offers.
           </div>
 
-          <div className="flex flex-col items-center gap-4 w-full max-w-md">
+          <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
             <input
               type="text"
               placeholder="Your favorite design field"

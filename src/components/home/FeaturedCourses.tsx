@@ -32,10 +32,10 @@ const FeaturedCourses = () => {
     }
   ]
   return (
-    <section id="courses" className="min-w-full mt-40">
+    <section id="courses" className="min-w-full mt-20 md:mt-32">
       <div className="container mx-auto flex flex-col justify-start items-center gap-12">
         <SectionHeader title="Workshops" description="Design in Every Way, For Everyone" />
-        <div className="container mx-auto flex max-lg:flex-col px-2 justify-between items-center lg:items-stretch gap-4">
+        <div className="container mx-auto flex flex-nowrap overflow-x-auto no-scrollbar justify-between items-center lg:items-stretch gap-4">
           {CardsData.map((card, index) => (
             <CourseCard key={index} image={card.image} title={card.title} description={card.description} link={card.link} tags={card.tags} />
           ))}
@@ -47,7 +47,7 @@ const FeaturedCourses = () => {
 
 const CourseCard = ({ image, title, description, tags, link }: { image: any, title: string, description: string, tags: string[], link: string }) => {
   return (
-    <div className="group relative lg:h-[444px] min-h-[390px] max-lg:container max-lg:mx-auto overflow-hidden rounded-2xl max-sm:rounded-xl bg-primary-900 shadow-[0px_4px_15px_rgba(0,0,0,0.30)] outline-1 outline-[rgba(172,174,247,0.20)] -outline-offset-1 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] hover:outline-[rgba(172,174,247,0.40)] flex flex-col">
+    <div className="group relative lg:h-[444px] min-h-[390px] w-1/3 min-w-[300px] max-lg:container max-lg:mx-auto overflow-hidden rounded-2xl max-sm:rounded-xl bg-primary-900 shadow-[0px_4px_15px_rgba(0,0,0,0.30)] outline-1 outline-[rgba(172,174,247,0.20)] -outline-offset-1 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] hover:outline-[rgba(172,174,247,0.40)] flex flex-col">
       {/* Image Container */}
       <div className="relative h-58  transition-all duration-500 ease-in-out group-hover:h-48 max-sm:h-48 w-full overflow-hidden">
         <Image
@@ -72,7 +72,7 @@ const CourseCard = ({ image, title, description, tags, link }: { image: any, tit
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 max-sm:gap-1 transition-all duration-500 ease-in-out group-hover:-translate-y-8">
+        <div className="flex flex-nowrap gap-2 max-sm:gap-1 transition-all duration-500 ease-in-out group-hover:-translate-y-8">
           {tags.map((tag, index) => (
             <span
               key={index}
