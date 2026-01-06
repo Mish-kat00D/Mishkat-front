@@ -5,6 +5,7 @@ import NavLogo from '../../../public/NavLogo.png'
 import { IoMenu } from 'react-icons/io5';
 import UserActions from './UserActions';
 import { getUser } from '@/lib/auth-server';
+import MobileMenu from './MobileMenu';
 
 const Navbar = async () => {
   const user = null // await getUser();
@@ -28,7 +29,7 @@ const Navbar = async () => {
             <UserActions user={user} />
           </Suspense>
         </div>
-        <IoMenu className='text-white lg:hidden hover:text-secondary-500 w-6 h-6' />
+        <MobileMenu navItems={navItems} user={user} />
       </div>
     </div>
   )

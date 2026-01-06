@@ -144,3 +144,27 @@ body {
   background-size: contain;
   background-color: var(--color-neutral-10);
 }
+
+@media (hover: none) {
+  .mobile-hover {
+    transform: translateY(-4px);
+  }
+
+  .mobile-hover .image-hover {
+    height: 11rem;
+    /* same as group-hover:h-48 */
+  }
+
+  .mobile-hover .content-hover {
+    transform: translateY(-1rem);
+  }
+
+  .mobile-hover .tags-hover {
+    transform: translateY(-2rem);
+  }
+
+  .mobile-hover .cta-hover {
+    transform: translateY(-2rem);
+    opacity: 1;
+  }
+}
