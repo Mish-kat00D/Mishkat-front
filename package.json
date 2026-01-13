@@ -6,13 +6,14 @@
     "dev": "next dev --turbopack",
     "devs": "next dev --experimental-https --experimental-https-key ./localhost-key.pem --experimental-https-cert ./localhost.pem",
     "build": "next build --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "start:prod": "next start -p 3001"
   },
   "dependencies": {
     "liquid-glass-react": "^1.1.1",
     "lucide-react": "^0.544.0",
-    "next": "15.5.9",
-    "react": "19.1.0",
+    "next": "^15.5.9",
+    "react": "^19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
     "react-switch": "^7.1.0"
