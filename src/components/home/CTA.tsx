@@ -1,11 +1,9 @@
 import React from 'react'
-import RedSpot from '../shared/RedSpot'
-import GlassSurface from '../shared/Glass'
 
 const CTA = () => {
   return (
-    <section className="mt-20">
-      <GlassSurface blur={20} displace={20} brightness={50} className='relative container! mx-auto px-4 h-max!' InnerClassName='flex! flex-col! items-center gap-8 p-7!'>
+    <section className="mt-20 md:mt-32">
+      <div className='relative container! mx-auto px-4 h-max! glass flex! flex-col! items-center gap-8 p-7!'>
         {/* Title + Subtitle */}
         <div className="flex flex-col items-center gap-4 text-center md:max-w-1/2">
           <h2 className="text-white text-5xl font-bold">
@@ -19,7 +17,7 @@ const CTA = () => {
         {/* CTA Button */}
         <button className=" px-6 py-3 bg-secondary-500 rounded-full flex justify-center items-center gap-2 hover:opacity-90 transition">
           <span className="text-white text-lg font-bold leading-relaxed">
-            Get Started For Free
+            Get Started
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +30,7 @@ const CTA = () => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </button>
-      </GlassSurface>
+      </div>
     </section>
   )
 }

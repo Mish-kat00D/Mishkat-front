@@ -22,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${sen.variable} ${sen.className} antialiased`}
+        className={`${sen.variable} ${sen.className} antialiased flex flex-col min-h-screen`}
       >
         <Navbar />
-        {children}
+        <div className="flex-1">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

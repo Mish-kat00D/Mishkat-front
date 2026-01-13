@@ -5,10 +5,11 @@ import NavLogo from '../../../public/NavLogo.png'
 import { IoMenu } from 'react-icons/io5';
 import UserActions from './UserActions';
 import { getUser } from '@/lib/auth-server';
+import MobileMenu from './MobileMenu';
 
 const Navbar = async () => {
   const user = null // await getUser();
-  const navItems = ['Programs', 'Courses', 'Community', 'About'];
+  const navItems = ['Workshops', 'About'];
 
   return (
     <div className="w-full position-fixed top-0 h-[90px] px-14 py-3.5 bg-primary-900 text-red-700 flex justify-between items-center overflow-hidden">
@@ -18,7 +19,7 @@ const Navbar = async () => {
             <Image src={NavLogo} alt="Logo" width={132.66} height={60} />
           </Link>
         </div>
-        <div className="w-[463px] max-lg:hidden flex justify-start items-center gap-6">
+        <div className="w-[463px] max-lg:hidden flex justify-center items-center gap-6">
           {navItems.map((item, index) => (
             <NavItem key={index} text={item} href={`/#${item.toLowerCase()}`} />
           ))}
@@ -28,7 +29,7 @@ const Navbar = async () => {
             <UserActions user={user} />
           </Suspense>
         </div>
-        <IoMenu className='text-white lg:hidden hover:text-secondary-500 w-6 h-6' />
+        <MobileMenu navItems={navItems} user={user} />
       </div>
     </div>
   )

@@ -1,28 +1,21 @@
-import { Twitter, Instagram, Linkedin, Youtube } from "lucide-react"
+import { Instagram, Linkedin, Youtube, Facebook } from "lucide-react"
 import NavLogo from '../../../public/NavLogo.png'
 import Image from 'next/image'
 import Link from 'next/link'
+import { BsWhatsapp } from "react-icons/bs"
 
 const footerLinks = [
   {
     title: "Platform",
-    items: ["Courses", "Studio Program", "Mentorship", "Community"],
-  },
-  {
-    title: "Resources",
-    items: ["Blog", "Tutorials", "Documentation", "Tools", "AI Resources"],
-  },
-  {
-    title: "Company",
-    items: ["About Us", "Careers", "Partners", "Contact"],
+    items: ["About", "Workshops", "Testimonials", "Email Us", "Get Ready", "FAQs"],
   },
 ]
 
 const socialLinks = [
-  { name: "Twitter", icon: Twitter },
-  { name: "Instagram", icon: Instagram },
-  { name: "LinkedIn", icon: Linkedin },
-  { name: "YouTube", icon: Youtube },
+  { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/share/17ofMTBBoz/?mibextid=wwXIfr" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/mish.kat_org" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/miishkatt/" },
+  { name: "YouTube", icon: Youtube, href: "https://youtube.com/@mishkat-e9w?si=Utof5eBRvepX4MxM" }
 ]
 
 export default function Footer() {
@@ -33,7 +26,7 @@ export default function Footer() {
           {/* Description + Newsletter */}
           <div className="flex flex-col items-start gap-6 mr-4">
             <Link href="/" className="flex justify-center items-center gap-2">
-                <Image src={NavLogo} alt="Logo" width={132.66} height={60} />
+              <Image src={NavLogo} alt="Logo" width={132.66} height={60} />
             </Link>
             <p className="text-neutral-400 text-base font-semibold">
               An Arabic-first educational platform merging architecture and artificial
@@ -58,11 +51,11 @@ export default function Footer() {
           </div>
 
           {/* Footer Links */}
-          <div className="flex flex-1 md:flex-row flex-col justify-end gap-8 items-start md:gap-32 max-lg:w-full md:max-w-1/2">
+          <div className="flex flex-1 md:flex-row flex-col justify-end md:justify-between gap-8 items-start md:gap-32">
             {footerLinks.map((section) => (
-              <div key={section.title} className="w-32 flex flex-col gap-4">
+              <div key={section.title} className="flex flex-col gap-4">
                 <h4 className="text-neutral-100 text-base font-semibold">{section.title}</h4>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-row md:flex-col gap-2">
                   {section.items.map((item) => (
                     <li
                       key={item}
@@ -79,15 +72,18 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="w-full flex flex-col lg:flex-row justify-between items-center gap-2 border-t-2 border-indigo-300/10 pt-4">
           {/* Terms */}
-          <div className="flex gap-4 text-primary-100 text-xs font-medium">
-            <a href="#">Terms and Conditions</a>
-            <a href="#">Privacy Policy</a>
+          <div className="flex gap-4 text-primary-100 text-xs font-medium items-center">
+            <a href="https://maps.app.goo.gl/MYvwqsGmQG8cWy7w5?g_st=ipc" target="_blank">98 - North Lotus, Area 4, فسم أول القاهرة الجديدة، محافظة القاهرة 4743030</a>
+            <span> - </span>
+            <a className="flex gap-2 items-center" href="https://wa.me/01033326205" target="_blank">
+              <BsWhatsapp className="w-5 h-5" /> +201033326205
+            </a>
           </div>
 
           {/* Social */}
           <div className="flex gap-6">
-            {socialLinks.map(({ name, icon: Icon }) => (
-              <a key={name} href="#" aria-label={name}>
+            {socialLinks.map(({ name, icon: Icon, href }) => (
+              <a key={name} href={href} aria-label={name}>
                 <Icon className="w-5 h-5 text-white hover:text-secondary-500 transition" />
               </a>
             ))}

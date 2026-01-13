@@ -1,6 +1,6 @@
 import {
+  WorkshopWatch,
   AiToolsYouWillMaster,
-  Hero,
   Instructor,
   Overview,
   ScheduleDesign,
@@ -14,9 +14,9 @@ import React from 'react'
 const Page = async ({ params }: { params: { id: string } }) => {
   // const id = params.id
   return (
-    <main className='container mx-auto flex flex-col justify-start items-center gap-11'>
-      {/* Hero */}
-      <Hero />
+    <main className='container mx-auto flex flex-col justify-start items-center gap-11 px-6 my-4'>
+      {/* Workshop Watch */}
+      <WorkshopWatch />
       {/* Overview */}
       <Overview />
       {/* Instructor */}

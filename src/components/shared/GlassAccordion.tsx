@@ -1,13 +1,12 @@
 "use client"
 import React, { useState } from 'react'
-import GlassSurface from './Glass'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 
-const GlassAccordion = ({ title, content }: { title: string, content: string }) => {
+const GlassAccordion = ({ title, content, name }: { title: string, content: string, name: string }) => {
   const [open, setOpen] = useState(false)
   return (
-    <GlassSurface blur={20} displace={20} brightness={50} className='w-full! h-max! rounded-2xl px-6'>
-      <details className='w-full' onToggle={() => setOpen(!open)}>
+    <div className='w-full! h-max! rounded-2xl px-6 glass'>
+      <details name={name} className='w-full' onToggle={() => setOpen(!open)}>
         <summary className='flex items-center justify-between h-[66px]'>
           <h2 className='text-lg text-white'>{title}</h2>
           {open ? <ChevronUp className='text-secondary-500' size={20} /> : <ChevronDown className='text-secondary-500' size={20} />}
@@ -16,7 +15,7 @@ const GlassAccordion = ({ title, content }: { title: string, content: string }) 
           {content}
         </p>
       </details>
-    </GlassSurface>
+    </div>
   )
 }
 

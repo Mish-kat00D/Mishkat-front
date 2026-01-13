@@ -16,15 +16,15 @@ const FQs = () => {
     {
       title: "Which workshops are right for me?",
       content:
-        "Mishkat offers workshops across all design disciplines  from graphic and UX to interior, motion, and furniture design. Whether you’re just starting out or looking to level up your skills, there’s something for every designer. With new workshops added regularly, you can learn practical skills, explore different styles, and get inspired every day."
+        "Mishkat offers workshops across all design disciplines  from graphic and UX to interior, motion, and furniture design. Whether you're just starting out or looking to level up your skills, there's something for every designer. With new workshops added regularly, you can learn practical skills, explore different styles, and get inspired every day."
     }
   ];
 
   return (
-    <div className="container mx-auto flex flex-col gap-4 p-6x items-center mt-52">
+    <div className="container mx-auto flex flex-col gap-4 p-6x items-center mt-20 md:mt-32">
       <h2 className="mb-7 text-5xl font-bold text-white text-center">Frequently Asked Questions</h2>
       {faqs.map((faq, index) => (
-        <GlassAccordion key={index} title={faq.title} content={faq.content} />
+        <GlassAccordion key={index} name='fqs' title={faq.title} content={faq.content} />
       ))}
     </div>
   )
