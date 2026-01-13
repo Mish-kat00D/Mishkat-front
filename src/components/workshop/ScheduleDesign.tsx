@@ -1,6 +1,10 @@
+"use client"
+import { useState } from "react";
 import GlassAccordion from "../shared/GlassAccordion";
 
 const ScheduleDesign = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   const days = [
     {
       title: "Day 1: Introduction to AI in Design",
@@ -28,6 +32,10 @@ const ScheduleDesign = () => {
     },
   ];
 
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <section className="w-full flex flex-col gap-6">
       {/* Title */}
@@ -38,7 +46,7 @@ const ScheduleDesign = () => {
       {/* Schedule List */}
       <div className="flex flex-col gap-6">
         {days.map((day, index) => (
-          <GlassAccordion key={index} title={day.title} content={day.content} />
+          <GlassAccordion key={index} name='schedule' title={day.title} content={day.content} />
         ))}
       </div>
     </section>

@@ -1,5 +1,3 @@
-import GlassSurface from "../shared/Glass";
-
 const learnItems = [
   "Foundations of AI in design",
   "Crafting effective prompts",
@@ -11,7 +9,7 @@ const learnItems = [
 
 const LearnItem = ({ text }: { text: string }) => {
   return (
-    <GlassSurface blur={20} displace={20} brightness={50} className='relative container! mx-auto h-max! rounded-[10.2px]! px-0!' InnerClassName='flex justify-start! items-center! gap-[10.2px]! p-[10.2px]!'>
+    <div className='relative container! mx-auto h-max! glass rounded-[10.2px]! px-[10.2px]! flex justify-start! items-center! gap-[10.2px]! p-[10.2px]!'>
       {/* Icon */}
       <div className="relative w-6 h-6 flex-shrink-0">
         <div className="absolute inset-0 m-auto w-5 h-5 border-[2px] border-secondary-500 rounded-full" />
@@ -22,7 +20,7 @@ const LearnItem = ({ text }: { text: string }) => {
       <p className="text-white text-base font-semibold leading-6">
         {text}
       </p>
-    </GlassSurface>
+    </div>
   );
 };
 

@@ -78,7 +78,7 @@ const tools: Tool[] = [
 
 const ToolCard = ({ tool }: { tool: Tool }) => {
   return (
-    <div className="relative rounded-2xl border border-white/10 shadow-md p-6 flex flex-col gap-4 bg-primary-1000">
+    <div className="relative rounded-2xl border border-white/10 glass shadow-md p-6 flex flex-col gap-4 bg-primary-1000">
       {/* Icon */}
       <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center shadow-lg">
         <img

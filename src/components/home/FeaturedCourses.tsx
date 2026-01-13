@@ -10,34 +10,27 @@ import { FaAngleRight } from 'react-icons/fa'
 const FeaturedCourses = () => {
   const CardsData = [
     {
-      image: Course1Img,
-      title: "AI Workflows for Arab Designers",
-      description: "Master AI-powered design tools optimized for Arabic typography and regional architectural styles.",
-      link: '/course/1',
-      tags: ['Midjourney', 'DALL-E', 'Stable Diffusion']
-    },
-    {
       image: Course2Img,
       title: "Interactive Prototyping for Architects",
       description: "Create immersive architectural experiences with real-time rendering and interactive elements.",
-      link: '/course/1',
+      id: '1',
       tags: ['Unreal Engine', 'Unity', 'WebXR']
     },
     {
       image: Course3Img,
       title: "Computational Design and Digital Fabrication",
       description: "Learn parametric modeling techniques and prepare designs for digital fabrication methods.",
-      link: '/course/1',
+      id: '1',
       tags: ['Grasshopper', 'Rhino', '3D Printing']
     }
   ]
   return (
-    <section id="courses" className="min-w-full mt-20 md:mt-32">
+    <section id="workshops" className="min-w-full mt-20 md:mt-32">
       <div className="container mx-auto flex flex-col justify-start items-center gap-12">
         <SectionHeader title="Workshops" description="Design in Every Way, For Everyone" />
-        <div className="container mx-auto flex flex-nowrap overflow-x-auto no-scrollbar justify-between items-center lg:items-stretch gap-4">
+        <div className="container mx-auto flex flex-nowrap overflow-x-auto no-scrollbar justify-evenly items-center lg:items-stretch gap-4">
           {CardsData.map((card, index) => (
-            <CourseCard key={index} image={card.image} title={card.title} description={card.description} link={card.link} tags={card.tags} />
+            <CourseCard key={index} image={card.image} title={card.title} description={card.description} id={card.id} tags={card.tags} />
           ))}
         </div>
       </div>
@@ -45,7 +38,7 @@ const FeaturedCourses = () => {
   )
 }
 
-const CourseCard = ({ image, title, description, tags, link }: { image: any, title: string, description: string, tags: string[], link: string }) => {
+const CourseCard = ({ image, title, description, tags, id }: { image: any, title: string, description: string, tags: string[], id: string }) => {
   return (
     <div className="group mobile-hover relative lg:h-[444px] min-h-[390px] w-1/3 min-w-[300px] max-lg:container max-lg:mx-auto overflow-hidden rounded-2xl max-sm:rounded-xl bg-primary-900 shadow-[0px_4px_15px_rgba(0,0,0,0.30)] outline-1 outline-[rgba(172,174,247,0.20)] -outline-offset-1 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] hover:outline-[rgba(172,174,247,0.40)] flex flex-col">
       {/* Image Container */}
@@ -86,7 +79,7 @@ const CourseCard = ({ image, title, description, tags, link }: { image: any, tit
 
       {/* CTA Button */}
       <div className="pointer-events-none absolute inset-x-0 p-4 bottom-0 z-20 max-sm:p-2">
-        <Link href={link} className="pointer-events-auto cta-hover w-full flex items-center justify-center gap-2 rounded-full bg-secondary-500 px-5 py-3 max-sm:py-2 font-sen font-medium max-sm:text-sm text-white transition-all duration-500 ease-in-out translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-secondary-600 hover:shadow-lg active:transform active:scale-95">
+        <Link href={`/workshop/${id}`} className="pointer-events-auto cta-hover w-full flex items-center justify-center gap-2 rounded-full bg-secondary-500 px-5 py-3 max-sm:py-2 font-sen font-medium max-sm:text-sm text-white transition-all duration-500 ease-in-out translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-secondary-600 hover:shadow-lg active:transform active:scale-95">
           <FaAngleRight className="text-white font-extralight transition-transform duration-500 ease-in-out group-hover:translate-x-1" />
           Explore
         </Link>

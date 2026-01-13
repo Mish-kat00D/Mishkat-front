@@ -1,4 +1,5 @@
 import React from 'react'
+import ExploreMoreButton from './ExploreMoreButton'
 
 const Hero = () => {
   return (
@@ -12,7 +13,7 @@ const Hero = () => {
           <h1 className='text-4xl md:text-6xl text-white font-bold max-md:text-center'>Empowering Arab Designers to Lead the Creative World</h1>
           <p className='text-xl text-neutral-400 max-md:text-center'>Join interactive workshops and courses across all design disciplines</p>
           <div className="flex justify-start items-center max-md:flex-col max-md:justify-center max-md:w-full">
-            <button className='bg-secondary-500 hover:bg-secondary-700 text-white text-lg px-8 py-2 rounded-full'>Explore Courses</button>
+            <ExploreMoreButton />
           </div>
         </div>
       </section>

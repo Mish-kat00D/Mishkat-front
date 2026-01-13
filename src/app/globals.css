@@ -120,6 +120,13 @@ body {
   font-family: 'Sen', sans-serif;
 }
 
+.glass {
+  background-color: color-mix(in srgb, var(--color-primary-900), transparent 80%);
+  border: 1px solid color-mix(in srgb, var(--color-indigo-300), transparent 80%);
+  box-shadow: 0px 4px 20px #00000059;
+  border-radius: 20px;
+}
+
 .icon {
   @apply w-6 h-6 text-secondary-500
 }
