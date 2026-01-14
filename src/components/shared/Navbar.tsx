@@ -2,13 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 import NavLogo from '../../../public/NavLogo.png'
-import { IoMenu } from 'react-icons/io5';
 import UserActions from './UserActions';
-import { getUser } from '@/lib/auth-server';
 import MobileMenu from './MobileMenu';
 
 const Navbar = async () => {
-  const user = null // await getUser();
   const navItems = ['Workshops', 'About'];
 
   return (
@@ -26,10 +23,10 @@ const Navbar = async () => {
         </div>
         <div className="max-lg:hidden flex justify-start items-center gap-6">
           <Suspense fallback={null}>
-            <UserActions user={user} />
+            <UserActions />
           </Suspense>
         </div>
-        <MobileMenu navItems={navItems} user={user} />
+        <MobileMenu navItems={navItems} />
       </div>
     </div>
   )

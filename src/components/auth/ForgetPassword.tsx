@@ -2,22 +2,26 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 interface ForgotPasswordFormProps {
   onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
 }
 
 export default function ForgotPasswordForm({ onSwitchView }: ForgotPasswordFormProps) {
+  const { forgotPassword, error: authError } = useAuth();
   const [email, setEmail] = useState("");
+  const [localError, setLocalError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLocalError(null);
     try {
-      // TODO: Replace with your backend call for sending reset code
-      console.log("Sending reset link to:", email);
+      await forgotPassword(email);
       onSwitchView('verify-code');
     } catch (err: any) {
       console.log(err.message);
+      setLocalError(err.message || "Failed to send reset code");
     }
   };
 
@@ -32,6 +36,11 @@ export default function ForgotPasswordForm({ onSwitchView }: ForgotPasswordFormP
       </div>
 
       {/* Form */}
+      {(localError || authError) && (
+        <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
+          {localError || authError}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <label className="flex flex-col gap-1 text-sm font-medium text-neutral-100">
           <p>

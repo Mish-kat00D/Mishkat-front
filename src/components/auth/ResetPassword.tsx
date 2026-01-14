@@ -1,22 +1,31 @@
-"use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 interface ResetPasswordFormProps {
   onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
 }
 
 export default function ResetPasswordForm({ onSwitchView }: ResetPasswordFormProps) {
+  const { resetPassword, error: authError } = useAuth();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [localError, setLocalError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLocalError(null);
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      setLocalError("Passwords do not match!");
+      return;
     }
-    onSwitchView('reset-password-success');
-    console.log("Reset successful:", password);
+    try {
+      await resetPassword({ password });
+      onSwitchView('reset-password-success');
+    } catch (err: any) {
+      console.log(err.message);
+      setLocalError(err.message || "Failed to reset password");
+    }
   };
 
   return (
@@ -30,6 +39,11 @@ export default function ResetPasswordForm({ onSwitchView }: ResetPasswordFormPro
       </div>
 
       {/* Form */}
+      {(localError || authError) && (
+        <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
+          {localError || authError}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {/* New Password */}
         <div className="flex flex-col gap-1">

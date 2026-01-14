@@ -2,14 +2,17 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 interface VerifyCodeFormProps {
   onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
 }
 
 export default function VerifyCodeForm({ onSwitchView }: VerifyCodeFormProps) {
+  const { verifyResetCode, error: authError } = useAuth();
   const length = 6;
   const [code, setCode] = useState<string[]>(Array(length).fill(""));
+  const [localError, setLocalError] = useState<string | null>(null);
   const inputsRef = useRef<Array<HTMLInputElement>>([]);
 
   const handleChange = (value: string, index: number) => {
@@ -32,13 +35,14 @@ export default function VerifyCodeForm({ onSwitchView }: VerifyCodeFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLocalError(null);
     const otp = code.join("");
     try {
-      // TODO: Replace with your backend API call
-      console.log("Submitting code:", otp);
+      await verifyResetCode({ code: otp });
       onSwitchView('reset-password');
     } catch (err: any) {
       console.log(err.message);
+      setLocalError(err.message || "Invalid code");
     }
   };
 
@@ -53,6 +57,11 @@ export default function VerifyCodeForm({ onSwitchView }: VerifyCodeFormProps) {
       </div>
 
       {/* OTP Form */}
+      {(localError || authError) && (
+        <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
+          {localError || authError}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="flex flex-col gap-1 text-sm font-medium text-neutral-100">
           <p>

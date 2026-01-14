@@ -4,8 +4,10 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import { IoNotifications } from 'react-icons/io5';
 import AuthModal from '../auth/AuthModal';
+import { useAuth } from '@/lib/hooks/useAuth';
 
-const UserActions = ({ user }: { user: any }) => {
+const UserActions = () => {
+  const { user } = useAuth();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authView, setAuthView] = useState<'login' | 'signup'>('login');
 
@@ -24,7 +26,7 @@ const UserActions = ({ user }: { user: any }) => {
             </div>
           </div>
           <Link href="/profile" className="flex justify-start items-center gap-2">
-            <Image alt='Profile' className="w-12 h-12 rounded-full" width={48} height={48} unoptimized src={user.profileImage ?? "https://placehold.co/48x48"}></Image>
+            <Image alt='Profile' className="w-12 h-12 rounded-full" width={48} height={48} unoptimized src={user.avatar ?? "https://placehold.co/48x48"}></Image>
           </Link>
         </div>
       ) : (

@@ -1,5 +1,5 @@
 "use client";
-import { signUp } from '@/lib/auth-client';
+import { useAuth } from '@/lib/hooks/useAuth';
 import { useAuthUI } from '@/lib/context/AuthContext';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,6 +11,8 @@ interface SignupFormProps {
 }
 
 const SignupForm = ({ onSwitchView }: SignupFormProps) => {
+  const { register, error: authError } = useAuth();
+  const [localError, setLocalError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,10 +24,25 @@ const SignupForm = ({ onSwitchView }: SignupFormProps) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted", form);
-    // TODO: integrate with API / auth provider
+    setLocalError(null);
+    if (form.password !== form.confirmPassword) {
+      setLocalError("Passwords do not match");
+      return;
+    }
+    try {
+      await register({
+        email: form.email,
+        password: form.password,
+        name: form.name,
+      });
+      // Redirect or show success message? Usually auto-login or switch to login
+      onSwitchView('login');
+    } catch (err: any) {
+      console.log(err.message);
+      setLocalError(err.message || "Failed to register");
+    }
   };
 
   return (
@@ -52,6 +69,12 @@ const SignupForm = ({ onSwitchView }: SignupFormProps) => {
         <span className="text-sm font-medium text-neutral-500">or sign up with email</span>
         <div className="h-px flex-1 bg-neutral-200" />
       </div>
+
+      {(localError || authError) && (
+        <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
+          {localError || authError}
+        </div>
+      )}
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

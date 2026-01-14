@@ -7,10 +7,8 @@ import UserActions from './UserActions'
 
 const MobileMenu = ({
   navItems,
-  user,
 }: {
   navItems: string[]
-  user: any
 }) => {
   const [open, setOpen] = useState(false)
 
@@ -66,7 +64,7 @@ const MobileMenu = ({
 
         {/* User Actions */}
         <div className="mt-10">
-          <UserActions user={user} />
+          <UserActions />
         </div>
       </aside>
     </>

@@ -1,25 +1,32 @@
 "use client";
 import { useState } from "react";
-import { signIn } from "@/lib/auth-client";
+import { useAuth } from "@/lib/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface LoginFormProps {
   onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
 }
 
 export default function LoginForm({ onSwitchView }: LoginFormProps) {
+  const router = useRouter();
+  const { login, error: authError } = useAuth();
   const [form, setForm] = useState({
     email: "",
     password: ""
   });
+  const [localError, setLocalError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLocalError(null);
     try {
-      await signIn(form.email, form.password);
+      await login(form);
+      router.push('/');
     } catch (err: any) {
       console.log(err.message);
+      setLocalError(err.message || "Failed to login");
     }
   };
 
@@ -52,6 +59,12 @@ export default function LoginForm({ onSwitchView }: LoginFormProps) {
         <span className="text-sm font-medium text-neutral-500">or login with email</span>
         <div className="h-px flex-1 bg-neutral-200" />
       </div>
+
+      {(localError || authError) && (
+        <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
+          {localError || authError}
+        </div>
+      )}
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
