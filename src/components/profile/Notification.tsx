@@ -1,3 +1,4 @@
+"use client"
 import { Bell, Mail } from 'lucide-react'
 import React, { useState } from 'react'
 import { BsPhone } from 'react-icons/bs';

@@ -1,6 +1,20 @@
+import { getUser } from '@/lib/server/user'
 import React from 'react'
 
-const Info = () => {
+interface InfoProps {
+  name: string
+  email: string
+  phone: string | null
+  location: string | null
+  website: string | null
+  createdAt: string
+}
+
+const Info = async () => {
+  const user: InfoProps | null = await getUser()
+  if (!user) return null
+
+  user.createdAt = new Date(user.createdAt).toLocaleDateString()
   return (
     <div className='flex flex-col gap-7 items-start w-full '>
       {/* Header */}
@@ -13,20 +27,20 @@ const Info = () => {
         {/* Left */}
         <div className='flex flex-col gap-4 w-1/2'>
           {/* Name */}
-          <PaceOfInfo label='Name' value='John Doe' />
+          <PaceOfInfo label='Name' value={user?.name ?? 'No Name'} />
           {/* Email */}
-          <PaceOfInfo label='Email' value='john.doe@example.com' />
+          <PaceOfInfo label='Email' value={user?.email ?? 'No Email'} />
           {/* Phone */}
-          <PaceOfInfo label='Phone' value='+1234567890' />
+          <PaceOfInfo label='Phone' value={user?.phone ?? 'No Phone'} />
         </div>
         {/* Right */}
         <div className='flex flex-col gap-4 w-1/2'>
           {/* Location */}
-          <PaceOfInfo label='Location' value='123 Main St, Anytown, USA' />
+          <PaceOfInfo label='Location' value={user?.location ?? 'No Location'} />
           {/* Website */}
-          <PaceOfInfo label='Website' value='https://www.example.com' />
+          <PaceOfInfo label='Website' value={user?.website ?? 'No Website'} />
           {/* Member Since */}
-          <PaceOfInfo label='Member Since' value='2022-01-01' />
+          <PaceOfInfo label='Member Since' value={user?.createdAt ?? 'No Member Since'} />
         </div>
       </div>
     </div>

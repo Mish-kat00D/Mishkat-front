@@ -1,17 +1,16 @@
-"use client"
-import { Bell, ChevronRight, InfoIcon, LayoutDashboard, LockKeyhole, MenuIcon, PersonStandingIcon, UserRound } from 'lucide-react'
-import React, { useState } from 'react'
+import { Bell, ChevronRight, LockKeyhole, MenuIcon, UserRound } from 'lucide-react'
+import React from 'react'
 import Info from './Info'
 import Dashboard from './Dashboard'
 import Notification from './Notification'
 import Security from './Security'
 import { BsBarChart } from 'react-icons/bs'
-import { LiaSignOutAltSolid } from 'react-icons/lia'
+import Link from 'next/link'
+import LogoutButton from './LogoutButton'
 
-const Layout = () => {
+const Layout = ({ page }: { page: string }) => {
   const pages = ['Dashboard', 'Profile Info', 'Notifications', 'Security'] as const
   type Page = (typeof pages)[number]
-  const [page, setPage] = useState<Page>('Dashboard')
 
   const renderPage = () => {
     switch (page) {
@@ -23,6 +22,8 @@ const Layout = () => {
         return <Notification />
       case 'Security':
         return <Security />
+      default:
+        return <Info />
     }
   }
 
@@ -51,12 +52,12 @@ const Layout = () => {
         <p className='items-center gap-2 text-white p-4 hidden md:flex'><MenuIcon /> Menu</p>
         <div className="flex md:flex-col gap-4 max-md:m-4 md:mt-5">
           {pages.map((pg) => (
-            <button key={pg} onClick={() => setPage(pg)}>
+            <Link href={`/profile?page=${pg}`} key={pg}>
               <p className={`flex items-center justify-between w-full max-md:border-b-2 md:border-r-2 hover:bg-secondary-10 hover:text-secondary-500 transition px-4 py-2 max-md:hover:border-b-secondary-500 md:hover:border-r-secondary-500 ${page == pg ? 'bg-secondary-10 text-secondary-500 max-md:border-b-secondary-500 md:border-r-secondary-500' : 'max-md:border-b-transparent md:border-r-transparent'}`}><span className='flex items-center gap-2'>{renderIcon(pg)}{pg}</span><ChevronRight className='w-4 h-4 hidden md:flex' /></p>
-            </button>
+            </Link>
           ))}
         </div>
-        <button onClick={handleLogout} className='mt-10 border border-primary-700 hover:border-secondary-50 hover:bg-secondary-50 transition rounded-full px-4 py-2 mx-auto hidden md:flex items-center justify-center gap-2 text-white m-4'><LiaSignOutAltSolid className='w-4 h-4' />Sign Out</button>
+        <LogoutButton />
       </div>
       <div className='bg-primary-900 border border-primary-700 rounded-3xl gap-4 md:w-3/4 w-full flex items-center justify-center py-6 px-5'>
         {renderPage()}

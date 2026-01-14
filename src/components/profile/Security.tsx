@@ -1,3 +1,4 @@
+"use client"
 import { LockKeyhole } from 'lucide-react'
 import React, { useState } from 'react'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
