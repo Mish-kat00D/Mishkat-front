@@ -24,7 +24,7 @@ export default function Footer() {
       <div className="container mx-auto  flex flex-col items-center gap-12 overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Description + Newsletter */}
-          <div className="flex flex-col items-start gap-6 mr-4">
+          <div className="flex flex-col items-start gap-6 lg:mr-4">
             <Link href="/" className="flex justify-center items-center gap-2">
               <Image src={NavLogo} alt="Logo" width={132.66} height={60} />
             </Link>
@@ -51,11 +51,11 @@ export default function Footer() {
           </div>
 
           {/* Footer Links */}
-          <div className="flex flex-1 md:flex-row flex-col justify-end md:justify-between gap-8 items-start md:gap-32">
+          <div className="flex flex-1 lg:flex-row flex-col justify-end lg:justify-between gap-8 items-start lg:gap-32">
             {footerLinks.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
                 <h4 className="text-neutral-100 text-base font-semibold">{section.title}</h4>
-                <ul className="flex flex-row md:flex-col gap-2">
+                <ul className="flex flex-col md:flex-row lg:flex-col gap-2">
                   {section.items.map((item) => (
                     <li
                       key={item}
@@ -72,11 +72,15 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="w-full flex flex-col lg:flex-row justify-between items-center gap-2 border-t-2 border-indigo-300/10 pt-4">
           {/* Terms */}
-          <div className="flex gap-4 text-primary-100 text-xs font-medium items-center">
+          <div className="flex gap-4 flex-col lg:flex-row text-primary-100 text-xs font-medium items-center">
             <a href="https://maps.app.goo.gl/MYvwqsGmQG8cWy7w5?g_st=ipc" target="_blank">98 - North Lotus, Area 4, فسم أول القاهرة الجديدة، محافظة القاهرة 4743030</a>
-            <span> - </span>
+            <span className="hidden lg:block"> - </span>
             <a className="flex gap-2 items-center" href="https://wa.me/01033326205" target="_blank">
               <BsWhatsapp className="w-5 h-5" /> +201033326205
+            </a>
+            <span className="hidden lg:block"> - </span>
+            <a className="flex gap-2 items-center" href="mailto:info@mish-kat.org" target="_blank">
+              info@mish-kat.org
             </a>
           </div>
 

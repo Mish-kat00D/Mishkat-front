@@ -8,7 +8,7 @@ import { BsBarChart } from 'react-icons/bs'
 import Link from 'next/link'
 import LogoutButton from './LogoutButton'
 
-const Layout = ({ page }: { page: string }) => {
+const Layout = ({ page, dashboardStats }: { page: string, dashboardStats?: any }) => {
   const pages = ['Dashboard', 'Profile Info', 'Notifications', 'Security'] as const
   type Page = (typeof pages)[number]
 
@@ -17,7 +17,7 @@ const Layout = ({ page }: { page: string }) => {
       case 'Profile Info':
         return <Info />
       case 'Dashboard':
-        return <Dashboard />
+        return <Dashboard data={dashboardStats} />
       case 'Notifications':
         return <Notification />
       case 'Security':
