@@ -1,8 +1,9 @@
 import { getUser } from '@/lib/server/user'
-import { BriefcaseBusiness, Camera, Edit } from 'lucide-react'
+import { BriefcaseBusiness, Camera } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import { CiGlobe, CiLocationOn } from 'react-icons/ci'
+import EditProfileButton from './EditProfileButton'
 
 export interface UserProfile {
   name: string
@@ -13,6 +14,8 @@ export interface UserProfile {
   website: string | null
   profileImageUrl: string | null
   coverImageUrl: string | null
+  email: string
+  phone: string | null
 }
 
 const Header = async () => {
@@ -46,11 +49,12 @@ const Header = async () => {
                   alt="Profile"
                   width={128}
                   height={128}
+                  unoptimized
                   className="h-full w-full object-cover"
                 />
               </div>
               {/* Edit Avatar Pencil – hidden on small screens */}
-              <button className="absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-secondary-500 text-white shadow-md transition hover:bg-secondary-400">
+              <button className="absolute hidden bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-secondary-500 text-white shadow-md transition hover:bg-secondary-400">
                 <Camera className="h-6 w-6" />
               </button>
             </div>
@@ -64,10 +68,7 @@ const Header = async () => {
           </div>
 
           {/* Edit Profile Button */}
-          <button className="justify-center self-center items-center gap-2 rounded-full bg-secondary-500 px-5 py-3 font-medium text-white transition hover:bg-secondary-700 flex">
-            <Edit className="h-4 w-4" />
-            Edit Profile
-          </button>
+          <EditProfileButton user={user} />
         </div>
 
         {/* Biography */}

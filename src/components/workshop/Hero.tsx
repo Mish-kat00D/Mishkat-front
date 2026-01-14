@@ -33,6 +33,7 @@ const Hero = ({ workshop }: { workshop: Workshop }) => {
             src={imageUrl || "/workshop.png"}
             alt={title}
             fill
+            unoptimized
             className='object-cover rounded-2xl h-full'
           />
         </div>
@@ -45,6 +46,7 @@ const Hero = ({ workshop }: { workshop: Workshop }) => {
                     src={instructor?.imgUrl || "/Ahmed.png"}
                     alt={instructor?.name || "Instructor"}
                     fill
+                    unoptimized
                     className='object-cover rounded-full'
                   />
                 </div>

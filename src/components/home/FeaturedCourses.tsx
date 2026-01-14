@@ -75,8 +75,9 @@ const CourseCard = ({ image, title, description, tags, slug }: { image: any, tit
       <div className="relative h-58 image-hover transition-all duration-500 ease-in-out group-hover:h-48 max-sm:h-48 w-full overflow-hidden">
         <Image
           alt="course image"
-          src={image ?? "https://placehold.co/429x287"}
+          src={image ?? "https://placehold.co/429x287?text=No+Image"}
           fill
+          unoptimized
           className="object-cover"
           sizes="100vw"
         />

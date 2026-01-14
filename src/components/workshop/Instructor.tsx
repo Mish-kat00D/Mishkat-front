@@ -57,6 +57,7 @@ export default function Instructor({ instructor }: { instructor: Workshop['instr
               src={instructor.imgUrl || "/instructorVideo.jpg"}
               alt={instructor.name}
               fill
+              unoptimized
               className="object-cover"
             />
           </div>

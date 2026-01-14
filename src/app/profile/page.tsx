@@ -8,7 +8,7 @@ const Page = async ({ searchParams }: { searchParams: { page: string } }) => {
   return (
     <>
       <Header />
-      <Layout page={searchParams.page} dashboardStats={dashboardStats} />
+      <Layout page={searchParams.page || 'Dashboard'} dashboardStats={dashboardStats} />
     </>
   )
 }

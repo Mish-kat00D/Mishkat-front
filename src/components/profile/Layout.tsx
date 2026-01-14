@@ -23,12 +23,8 @@ const Layout = ({ page, dashboardStats }: { page: string, dashboardStats?: any }
       case 'Security':
         return <Security />
       default:
-        return <Info />
+        return <Dashboard data={dashboardStats} />
     }
-  }
-
-  const handleLogout = () => {
-
   }
 
   const renderIcon = (page: Page) => {
@@ -45,14 +41,14 @@ const Layout = ({ page, dashboardStats }: { page: string, dashboardStats?: any }
   }
 
   return (
-    <div className='container mx-auto flex flex-col md:flex-row justify-between gap-4'>
+    <div id='layout' className='container mx-auto flex flex-col md:flex-row justify-between gap-4'>
       {/* SideBar */}
       <div className='bg-primary-900 border border-primary-700 rounded-3xl gap-4 md:w-1/4 w-full overflow-x-auto no-scrollbar whitespace-nowrap max-h-fit'>
         {/* <ChevronRight className='w-4 h-4 md:hidden flex absolute pointer-events-none top-1/2 -translate-y-1/2 right-2 z-10' /> */}
         <p className='items-center gap-2 text-white p-4 hidden md:flex'><MenuIcon /> Menu</p>
         <div className="flex md:flex-col gap-4 max-md:m-4 md:mt-5">
           {pages.map((pg) => (
-            <Link href={`/profile?page=${pg}`} key={pg}>
+            <Link href={`/profile#layout?page=${pg}`} key={pg}>
               <p className={`flex items-center justify-between w-full max-md:border-b-2 md:border-r-2 hover:bg-secondary-10 hover:text-secondary-500 transition px-4 py-2 max-md:hover:border-b-secondary-500 md:hover:border-r-secondary-500 ${page == pg ? 'bg-secondary-10 text-secondary-500 max-md:border-b-secondary-500 md:border-r-secondary-500' : 'max-md:border-b-transparent md:border-r-transparent'}`}><span className='flex items-center gap-2'>{renderIcon(pg)}{pg}</span><ChevronRight className='w-4 h-4 hidden md:flex' /></p>
             </Link>
           ))}
