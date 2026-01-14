@@ -1,6 +1,17 @@
+import { Workshop } from "@/types/workshop";
 import { CircleCheck, Zap } from "lucide-react";
 
-const BlackFridayOfferDesign = () => {
+const BlackFridayOfferDesign = ({
+  price,
+  originalPrice,
+  currency,
+}: {
+  price: number;
+  originalPrice: number | null;
+  currency: string;
+}) => {
+  const discount = originalPrice ? originalPrice - price : 0;
+
   const features = [
     "8 hours of recorded training",
     "4 comprehensive modules",
@@ -13,7 +24,7 @@ const BlackFridayOfferDesign = () => {
     <section className="w-full max-w-[672px] mx-auto flex flex-col gap-8">
       {/* Title */}
       <h2 className="text-center text-white text-3xl font-bold leading-[48px]">
-        Limited Black Friday Offer
+        Limited Offer
       </h2>
 
       {/* Card */}
@@ -30,16 +41,20 @@ const BlackFridayOfferDesign = () => {
         <div className="flex flex-col gap-3">
           <div className="flex items-end gap-6">
             <span className="text-secondary-500 text-6xl font-bold">
-              2000 EGP
+              {price} {currency}
             </span>
-            <span className="text-white/40 text-xl line-through">
-              7000 EGP
-            </span>
+            {originalPrice && (
+              <span className="text-white/40 text-xl line-through">
+                {originalPrice} {currency}
+              </span>
+            )}
           </div>
 
-          <p className="text-white/70 text-lg font-medium">
-            Save 5000 EGP with our Black Friday offer!
-          </p>
+          {discount > 0 && (
+            <p className="text-white/70 text-lg font-medium">
+              Save {discount} {currency} with our offer!
+            </p>
+          )}
         </div>
 
         {/* Features */}

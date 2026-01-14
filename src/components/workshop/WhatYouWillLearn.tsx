@@ -1,12 +1,3 @@
-const learnItems = [
-  "Foundations of AI in design",
-  "Crafting effective prompts",
-  "Using Stable Diffusion, ComfyUI",
-  "Generative AI for ideation",
-  "AI-based rendering and storytelling",
-  "AI ethics and responsible usage",
-];
-
 const LearnItem = ({ text }: { text: string }) => {
   return (
     <div className='relative container! mx-auto h-max! glass rounded-[10.2px]! px-[10.2px]! flex justify-start! items-center! gap-[10.2px]! p-[10.2px]!'>
@@ -24,7 +15,9 @@ const LearnItem = ({ text }: { text: string }) => {
   );
 };
 
-const WhatYouWillLearn = () => {
+const WhatYouWillLearn = ({ items }: { items: string[] }) => {
+  if (!items || items.length === 0) return null;
+
   return (
     <section className="w-full flex flex-col gap-6">
       {/* Title */}
@@ -34,8 +27,8 @@ const WhatYouWillLearn = () => {
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {learnItems.map((item) => (
-          <LearnItem key={item} text={item} />
+        {items.map((item, index) => (
+          <LearnItem key={index} text={item} />
         ))}
       </div>
     </section>

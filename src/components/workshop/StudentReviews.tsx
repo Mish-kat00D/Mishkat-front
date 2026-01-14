@@ -1,49 +1,5 @@
+import { Workshop } from "@/types/workshop";
 import { PiStarBold, PiStarFill } from "react-icons/pi";
-
-type Review = {
-  quote: string;
-  name: string;
-  role: string;
-  rating: number;
-};
-
-const reviews: Review[] = [
-  {
-    quote:
-      "Mishkat transformed my approach to design. The AI tools helped me win my first architectural competition.",
-    name: "Ali Al-Qasimi",
-    role: "Architecture Student",
-    rating: 4,
-  },
-  {
-    quote:
-      "The course opened my eyes to how AI can accelerate ideation without killing creativity.",
-    name: "Sara Mahmoud",
-    role: "UX Designer",
-    rating: 5,
-  },
-  {
-    quote:
-      "I finally understand how to use generative AI professionally, not just for experiments.",
-    name: "Omar Hassan",
-    role: "Interior Designer",
-    rating: 4,
-  },
-  {
-    quote:
-      "The workflows taught here saved me hours every week on concept development.",
-    name: "Nour El-Din",
-    role: "Product Designer",
-    rating: 5,
-  },
-  {
-    quote:
-      "Clear explanations, practical tools, and real design use cases. Highly recommended.",
-    name: "Mariam Adel",
-    role: "Visual Designer",
-    rating: 5,
-  },
-];
 
 const Stars = ({ rating }: { rating: number }) => {
   return (
@@ -59,12 +15,12 @@ const Stars = ({ rating }: { rating: number }) => {
   );
 };
 
-const ReviewCard = ({ review }: { review: Review }) => {
+const ReviewCard = ({ review }: { review: Workshop['reviews'][0] }) => {
   return (
     <div className="min-w-[320px] max-w-[380px] flex-shrink-0 rounded-2xl bg-primary-900/20 border border-indigo-300/20 shadow-[0px_4px_20px_rgba(0,0,0,0.35)] px-4 py-6 flex flex-col items-center gap-5">
       {/* Quote */}
       <p className="text-center flex-1 text-neutral-300 text-xl font-medium leading-8">
-        “{review.quote}”
+        “{review.comment}”
       </p>
 
       {/* Divider */}
@@ -76,7 +32,7 @@ const ReviewCard = ({ review }: { review: Review }) => {
           {review.name}
         </p>
         <p className="text-neutral-400 text-sm font-bold">
-          {review.role}
+          Verified Student
         </p>
       </div>
 
@@ -86,7 +42,8 @@ const ReviewCard = ({ review }: { review: Review }) => {
   );
 };
 
-const StudentReviews = () => {
+const StudentReviews = ({ reviews }: { reviews: Workshop['reviews'] }) => {
+  if (!reviews || reviews.length === 0) return null;
   return (
     <section className="w-full flex flex-col gap-6">
       {/* Title */}

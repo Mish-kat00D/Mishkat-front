@@ -1,88 +1,12 @@
-type Tool = {
-  name: string;
-  description: string;
-  points: string[];
-};
+import { Workshop } from '@/types/workshop';
 
-const tools: Tool[] = [
-  {
-    name: "ChatGPT",
-    description: "For creativity, planning & idea generation",
-    points: [
-      "Brainstorm design ideas fast",
-      "Write creative briefs",
-      "Get AI-based design feedback",
-    ],
-  },
-  {
-    name: "Perplexity",
-    description: "For smart research",
-    points: [
-      "Collect visual references",
-      "Summarize complex topics",
-    ],
-  },
-  {
-    name: "Midjourney",
-    description: "For design generation & style creation",
-    points: [
-      "Generate concept visuals",
-      "Build consistent aesthetics",
-    ],
-  },
-  {
-    name: "Mhm.ai",
-    description: "For branding & product design",
-    points: [
-      "Create brand systems",
-      "Generate product mockups",
-    ],
-  },
-  {
-    name: "Nano Banana",
-    description: "For brand identity visualization",
-    points: ["Keep design tone & color unified"],
-  },
-  {
-    name: "Microsoft Copilot",
-    description: "For AI-assisted daily design work",
-    points: ["Automate creative workflows"],
-  },
-  {
-    name: "Flux",
-    description: "For dynamic & motion-based designs",
-    points: ["Experiment with motion and animation"],
-  },
-  {
-    name: "Leonardo.ai",
-    description: "For high-quality, realistic visuals",
-    points: ["Generate photorealistic designs"],
-  },
-  {
-    name: "Stable Diffusion",
-    description: "For total control over outputs",
-    points: [
-      "Build ControlNet workflows",
-      "Use style transfer & fine-tuning",
-    ],
-  },
-  {
-    name: "ComfyUI",
-    description: "For custom workflows",
-    points: [
-      "Build and automate design pipelines",
-      "Use LoRA models & upscale to 4K",
-    ],
-  },
-];
-
-const ToolCard = ({ tool }: { tool: Tool }) => {
+const ToolCard = ({ tool }: { tool: Workshop['tools'][0] }) => {
   return (
     <div className="relative rounded-2xl border border-white/10 glass shadow-md p-6 flex flex-col gap-4 bg-primary-1000">
       {/* Icon */}
       <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center shadow-lg">
         <img
-          src="https://placehold.co/64x64"
+          src={tool.logoUrl || "https://placehold.co/64x64"}
           alt={tool.name}
           className="w-full h-full object-cover rounded-2xl"
         />
@@ -97,21 +21,13 @@ const ToolCard = ({ tool }: { tool: Tool }) => {
       <p className="text-white/60 text-sm">
         {tool.description}
       </p>
-
-      {/* Points */}
-      <ul className="flex flex-col gap-2 pt-2">
-        {tool.points.map((point) => (
-          <li key={point} className="flex gap-2 text-white/70 text-sm">
-            <span className="text-secondary-500">•</span>
-            {point}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
 
-const AiToolsYouWillMaster = () => {
+const AiToolsYouWillMaster = ({ tools }: { tools: Workshop['tools'] }) => {
+  if (!tools || tools.length === 0) return null;
+
   return (
     <section className="w-full flex flex-col gap-2">
       {/* Title */}

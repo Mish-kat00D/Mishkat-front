@@ -2,7 +2,7 @@ type Lesson = {
   id: string;
   title: string;
   duration: number;
-  hlsUrl: string;
+  hlsUrl: string | null;
 };
 
 const VideoPlayer = ({ lesson }: { lesson: Lesson }) => {
@@ -20,7 +20,7 @@ const VideoPlayer = ({ lesson }: { lesson: Lesson }) => {
         controls
         className="w-full h-full object-contain bg-black"
       >
-        <source src={lesson.hlsUrl} type="application/x-mpegURL" />
+        <source src={lesson.hlsUrl || ''} type="application/x-mpegURL" />
       </video>
 
       {/* Overlay title (design only) */}

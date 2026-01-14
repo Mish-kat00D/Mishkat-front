@@ -1,76 +1,12 @@
 import VideoPlayer from "./VideoPlayer";
 import LessonList from "./LessonList";
+import { Session } from "@/types/session";
 
-const workshop = {
-  title: "Computational Design and Digital Fabrication",
-  description:
-    "Design smarter, fabricate faster — AI-enhanced digital production for architects",
-  lessons: [
-    {
-      id: "l1",
-      title: "Introduction to Computational Design",
-      duration: 780,
-      hlsUrl: "https://example.com/signed/lesson-1/master.m3u8",
-    },
-    {
-      id: "l2",
-      title: "Parametric Modeling Basics",
-      duration: 920,
-      hlsUrl: "https://example.com/signed/lesson-2/master.m3u8",
-    },
-    {
-      id: "l3",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-    {
-      id: "l4",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-    {
-      id: "l5",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-    {
-      id: "l6",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-    {
-      id: "l7",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-    {
-      id: "l8",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-    {
-      id: "l9",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-    {
-      id: "l10",
-      title: "Digital Fabrication Workflows",
-      duration: 1100,
-      hlsUrl: "https://example.com/signed/lesson-3/master.m3u8",
-    },
-  ],
-};
 
-const WorkshopWatch = () => {
-  const currentLesson = workshop.lessons[0]; // dummy active lesson
+
+const WorkshopWatch = ({ sessions }: { sessions: Session }) => {
+  const currentLesson = sessions; // dummy active lesson
+  const workshop = sessions.workshop;
 
   return (
     <section className="w-full max-w-[1320px] mx-auto flex flex-col gap-6">
@@ -89,11 +25,20 @@ const WorkshopWatch = () => {
 
       <div className="flex max-lg:flex-col gap-6 justify-between">
         {/* Player */}
-        <VideoPlayer lesson={currentLesson} />
+        <VideoPlayer lesson={{
+          id: currentLesson.id,
+          title: currentLesson.title,
+          duration: currentLesson.duration,
+          hlsUrl: currentLesson.videoUrl,
+        }} />
 
         {/* ================= Playlist ================= */}
         <LessonList
-          lessons={workshop.lessons}
+          lessons={workshop.sessions.map((session) => ({
+            id: session.id!,
+            title: session.title,
+            duration: session.duration!,
+          }))}
           activeLessonId={currentLesson.id}
         />
       </div>

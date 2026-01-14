@@ -1,6 +1,9 @@
+import { Workshop } from "@/types/workshop";
 import Image from "next/image";
 
-export default function Instructor() {
+export default function Instructor({ instructor }: { instructor: Workshop['instructor'] }) {
+  if (!instructor) return null;
+
   return (
     <section className="w-full container mx-auto flex flex-col gap-8">
       {/* Title */}
@@ -25,9 +28,9 @@ export default function Instructor() {
 
             {/* Name & Title */}
             <div className="flex flex-col gap-1">
-              <p className="text-white text-base">Jailane Atef</p>
+              <p className="text-white text-base">{instructor.name}</p>
               <p className="text-secondary-500 text-base">
-                Senior Architect & AI Researcher
+                {instructor.title}
               </p>
             </div>
           </div>
@@ -36,24 +39,14 @@ export default function Instructor() {
           <ul className="flex flex-col gap-4 text-white/80 text-base">
             <li className="flex gap-3">
               <span className="text-secondary-500">•</span>
-              +10 years of design and teaching experience
+              {instructor.bio}
             </li>
-            <li className="flex gap-3">
-              <span className="text-secondary-500">•</span>
-              Lecturer at AASTMT
-            </li>
-            <li className="flex gap-3">
-              <span className="text-secondary-500">•</span>
-              MSc. in Generative AI & Creativity
-            </li>
-            <li className="flex gap-3">
-              <span className="text-secondary-500">•</span>
-              Speaker at the University of Maryland PM Symposium
-            </li>
-            <li className="flex gap-3">
-              <span className="text-secondary-500">•</span>
-              Studied Machine Learning & Python at Stanford
-            </li>
+            {instructor.achievements && instructor.achievements.map((achievement) => (
+              <li key={achievement.id} className="flex gap-3">
+                <span className="text-secondary-500">•</span>
+                {achievement.title}
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -61,8 +54,8 @@ export default function Instructor() {
         <div className="flex-1 p-6 rounded-3xl bg-primary-1000 border border-cyan-500/30 flex items-center justify-center">
           <div className="relative w-full h-[260px] md:h-[326px] rounded-2xl overflow-hidden">
             <Image
-              src="/instructorVideo.jpg"
-              alt="Instructor"
+              src={instructor.imgUrl || "/instructorVideo.jpg"}
+              alt={instructor.name}
               fill
               className="object-cover"
             />

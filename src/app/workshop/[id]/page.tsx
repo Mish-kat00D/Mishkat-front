@@ -9,30 +9,40 @@ import {
   WorkshopResults,
   BlackFridayOfferDesign
 } from '@/components/workshop'
+import { Workshop } from '@/types/workshop'
 import React from 'react'
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  // const id = params.id
+  const res = await fetch(`${process.env.API_URL}/workshops/${params.id}`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch workshop data')
+  }
+  const data: Workshop = await res.json();
+  console.log("workshop data", data)
   return (
     <main className='container mx-auto flex flex-col justify-start items-center gap-11'>
       {/* Hero */}
-      <Hero />
+      <Hero workshop={data} />
       {/* Overview */}
-      <Overview />
+      <Overview description={data.description} />
       {/* Instructor */}
-      <Instructor />
+      <Instructor instructor={data.instructor} />
       {/* What You'll Learn */}
-      <WhatYouWillLearn />
+      <WhatYouWillLearn items={data.whatYoullMaster} />
       {/* AI Tools You'll Master */}
-      <AiToolsYouWillMaster />
+      <AiToolsYouWillMaster tools={data.tools} />
       {/* Student Reviews */}
-      <StudentReviews />
+      <StudentReviews reviews={data.reviews} />
       {/* Workshop Results */}
-      <WorkshopResults />
+      <WorkshopResults results={data.studentResults} />
       {/* Schedule */}
-      <ScheduleDesign />
+      <ScheduleDesign sessions={data.sessions} />
       {/* Black Friday Offer */}
-      <BlackFridayOfferDesign />
+      <BlackFridayOfferDesign
+        price={data.price}
+        originalPrice={data.originalPrice}
+        currency={data.currency}
+      />
     </main>
   )
 }
