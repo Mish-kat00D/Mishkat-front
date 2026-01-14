@@ -7,7 +7,8 @@
     "devs": "next dev --experimental-https --experimental-https-key ./localhost-key.pem --experimental-https-cert ./localhost.pem",
     "build": "next build --turbopack",
     "start": "next start",
-    "start:prod": "next start -p 3001"
+    "start:prod": "next start -p 3001",
+    "start:server": "npm run build && pm2 restart mishkat-frontend"
   },
   "dependencies": {
     "liquid-glass-react": "^1.1.1",

@@ -7,7 +7,7 @@ interface ResetPasswordFormProps {
 }
 
 export default function ResetPasswordForm({ onSwitchView }: ResetPasswordFormProps) {
-  const { resetPassword, error: authError } = useAuth();
+  const { resetPassword, loading, error: authError } = useAuth();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [localError, setLocalError] = useState<string | null>(null);
@@ -39,7 +39,7 @@ export default function ResetPasswordForm({ onSwitchView }: ResetPasswordFormPro
       </div>
 
       {/* Form */}
-      {(localError || authError) && (
+      {(localError || (authError && authError !== "Unauthorized")) && (
         <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
           {localError || authError}
         </div>
@@ -78,6 +78,7 @@ export default function ResetPasswordForm({ onSwitchView }: ResetPasswordFormPro
         {/* Submit */}
         <button
           type="submit"
+          disabled={loading}
           className="w-full py-2 rounded-full bg-secondary-500 hover:bg-secondary-800 text-white font-semibold mt-2"
         >
           Reset Password

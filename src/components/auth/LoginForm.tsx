@@ -11,7 +11,7 @@ interface LoginFormProps {
 
 export default function LoginForm({ onSwitchView }: LoginFormProps) {
   const router = useRouter();
-  const { login, error: authError } = useAuth();
+  const { login, loading, error: authError } = useAuth();
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -23,7 +23,11 @@ export default function LoginForm({ onSwitchView }: LoginFormProps) {
     setLocalError(null);
     try {
       await login(form);
-      router.push('/');
+      if (window.location.pathname === "/") {
+        window.location.reload();
+      } else {
+        router.push("/");
+      }
     } catch (err: any) {
       console.log(err.message);
       setLocalError(err.message || "Failed to login");
@@ -46,7 +50,7 @@ export default function LoginForm({ onSwitchView }: LoginFormProps) {
 
       {/* Google Auth */}
       <Link
-        href={`${process.env.NEXT_PUBLIC_API_URL ?? 'https://api.mish-kat.org'}/auth/google`}
+        href={`${process.env.NEXT_PUBLIC_API_URL ?? 'https://mish-kat.org/api'}/auth/google`}
         className="mb-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary-1000 px-4 py-2 shadow-md outline-1 outline-indigo-600/20 transition hover:bg-primary-900"
       >
         <Image src="/Google.svg" alt="Google Logo" width={32} height={32} />
@@ -60,7 +64,7 @@ export default function LoginForm({ onSwitchView }: LoginFormProps) {
         <div className="h-px flex-1 bg-neutral-200" />
       </div>
 
-      {(localError || authError) && (
+      {(localError || (authError && authError !== "Unauthorized")) && (
         <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
           {localError || authError}
         </div>
@@ -97,6 +101,7 @@ export default function LoginForm({ onSwitchView }: LoginFormProps) {
 
         <button
           type="submit"
+          disabled={loading}
           className="rounded-full bg-secondary-500 px-4 py-2 font-medium text-white transition hover:bg-secondary-800"
         >
           Log In

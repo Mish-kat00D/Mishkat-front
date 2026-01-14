@@ -9,7 +9,7 @@ interface VerifyCodeFormProps {
 }
 
 export default function VerifyCodeForm({ onSwitchView }: VerifyCodeFormProps) {
-  const { verifyResetCode, error: authError } = useAuth();
+  const { verifyResetCode, loading, error: authError } = useAuth();
   const length = 6;
   const [code, setCode] = useState<string[]>(Array(length).fill(""));
   const [localError, setLocalError] = useState<string | null>(null);
@@ -57,7 +57,7 @@ export default function VerifyCodeForm({ onSwitchView }: VerifyCodeFormProps) {
       </div>
 
       {/* OTP Form */}
-      {(localError || authError) && (
+      {(localError || (authError && authError !== "Unauthorized")) && (
         <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
           {localError || authError}
         </div>
@@ -86,6 +86,7 @@ export default function VerifyCodeForm({ onSwitchView }: VerifyCodeFormProps) {
 
         <button
           type="submit"
+          disabled={loading}
           className="rounded-full bg-secondary-500 px-4 py-2 font-medium text-white transition hover:bg-secondary-800"
         >
           Submit

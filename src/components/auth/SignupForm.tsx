@@ -11,7 +11,7 @@ interface SignupFormProps {
 }
 
 const SignupForm = ({ onSwitchView }: SignupFormProps) => {
-  const { register, error: authError } = useAuth();
+  const { register, loading, error: authError } = useAuth();
   const [localError, setLocalError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
@@ -70,7 +70,7 @@ const SignupForm = ({ onSwitchView }: SignupFormProps) => {
         <div className="h-px flex-1 bg-neutral-200" />
       </div>
 
-      {(localError || authError) && (
+      {(localError || (authError && authError !== "Unauthorized")) && (
         <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
           {localError || authError}
         </div>
@@ -132,6 +132,7 @@ const SignupForm = ({ onSwitchView }: SignupFormProps) => {
 
         <button
           type="submit"
+          disabled={loading}
           className="rounded-full bg-secondary-500 px-4 py-2 font-medium text-white transition hover:bg-secondary-600"
         >
           Sign Up
