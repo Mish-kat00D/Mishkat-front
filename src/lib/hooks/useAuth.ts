@@ -117,7 +117,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     getProfile();
-  }, [getProfile]);
+  }, []);
 
   return {
     user,

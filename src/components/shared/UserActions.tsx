@@ -29,7 +29,7 @@ const UserActions = () => {
               </div>
             </div>
             <Link href="/profile" className="flex justify-start items-center gap-2">
-              <Image alt='Profile' className="w-12 h-12 rounded-full" width={48} height={48} unoptimized src={user.avatar ?? "https://placehold.co/48x48"}></Image>
+              <Image alt='Profile' className="w-12 h-12 rounded-full" width={48} height={48} unoptimized src={user.profileImageUrl ?? "https://placehold.co/48x48"}></Image>
             </Link>
           </div>
         ) : (

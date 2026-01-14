@@ -13,17 +13,23 @@ export interface LoginDto {
   password: string;
 }
 
-export type UserRole = 'ADMIN' | 'INSTRUCTOR' | 'STUDENT';
+export type UserRole = 'ADMIN' | 'STUDENT';
 
 export interface UserResponseDto {
-  id: string;
-  email: string;
-  name: string;
-  avatar?: string;
-  role: UserRole;
-  isEmailVerified: boolean;
-  createdAt: string; // Dates are strings in JSON responses
-  updatedAt: string;
+    id: string;
+    name: string;
+    email: string;
+    role: UserRole;
+    googleId: string | null;
+    title: string | null;
+    company: string | null;
+    phone: string | null;
+    bio: string | null;
+    location: string | null;
+    website: string | null;
+    profileImageUrl: string | null;
+    coverImageUrl: string | null;
+    twoFA: boolean;
 }
 
 export interface AuthResponseDto {
