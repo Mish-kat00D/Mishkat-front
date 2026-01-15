@@ -34,12 +34,14 @@ const WorkshopWatch = ({ sessions }: { sessions: Session }) => {
 
         {/* ================= Playlist ================= */}
         <LessonList
-          lessons={workshop.sessions.map((session) => ({
+          lessons={workshop.sessions.sort((a, b) => a.idx - b.idx).map((session) => ({
             id: session.id!,
+            idx: session.idx,
             title: session.title,
             duration: session.duration!,
           }))}
           activeLessonId={currentLesson.id}
+          workshopId={workshop.id}
         />
       </div>
 

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type Lesson = {
   id: string;
   title: string;
@@ -14,13 +16,16 @@ const LessonItem = ({
   lesson,
   index,
   active,
+  workshopId,
 }: {
   lesson: Lesson;
   index: number;
   active: boolean;
+  workshopId: string;
 }) => {
   return (
-    <div
+    <Link
+      href={`/workshop/${workshopId}/watch/${lesson.id}`}
       className={`
         px-3 py-2 rounded-xl border flex items-center gap-3 cursor-pointer
         ${active
@@ -29,7 +34,7 @@ const LessonItem = ({
       `}
     >
       <div className="w-8 h-8 rounded-full border border-secondary-500 flex items-center justify-center text-xs text-white">
-        {index + 1}
+        {index}
       </div>
 
       <div className="flex-1 flex flex-col gap-0.5">
@@ -40,7 +45,7 @@ const LessonItem = ({
           {formatDuration(lesson.duration)}
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 

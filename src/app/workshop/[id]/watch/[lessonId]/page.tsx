@@ -1,3 +1,4 @@
+"use client"
 import {
   WorkshopWatch,
   AiToolsYouWillMaster,
@@ -10,23 +11,53 @@ import {
   BlackFridayOfferDesign
 } from '@/components/workshop'
 import { Session } from '@/types/session';
-import React from 'react'
-import { cookies } from 'next/headers'
+import { useEffect, useState } from 'react'
 
 const Page = async ({ params }: { params: { id: string, lessonId: string } }) => {
-  console.log(`${process.env.API_URL}/workshop/${params.id}/session/${params.lessonId}`)
-  const res = await fetch(`${process.env.API_URL}/workshop/${params.id}/session/${params.lessonId}`, {
-    headers: {
-      Cookie: cookies().toString(),
-    },
-    cache: 'no-store',
-  });
-  if (!res.ok) {
-    const error = await res.json();
-    console.log(error)
-    throw new Error(error.message)
+  const [data, setData] = useState<Session | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/workshop/${params.id}/session/${params.lessonId}`
+  useEffect(() => {
+
+    const fetchSessions = async () => {
+      setLoading(true)
+      const res = await fetch(url, { credentials: "include" })
+
+      if (!res.ok) {
+        const error = await res.json();
+        console.log(error)
+        setLoading(false)
+        setError(error.message)
+        return
+      }
+
+      const data = await res.json()
+
+      if (!data) {
+        setLoading(false)
+        setError("No data found")
+        return
+      }
+
+      setData(data)
+      setLoading(false)
+    }
+    fetchSessions()
+  }, [url])
+
+  if (loading) {
+    return <div>Loading...</div>
   }
-  const data: Session = await res.json();
+
+  if (error) {
+    return <div>{error}</div>
+  }
+
+  if (!data) {
+    return <div>No data found</div>
+  }
 
   console.log("session data", data)
   return (
