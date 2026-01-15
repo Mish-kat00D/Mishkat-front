@@ -10,6 +10,7 @@ import {
   ForgotPasswordDto,
   VerifyResetCodeDto,
   ResetPasswordDto,
+  ChangePasswordDto,
 } from "@/types/auth";
 
 const API_URL =
@@ -115,6 +116,10 @@ export const useAuth = () => {
     return apiCall("reset-password", "POST", data);
   };
 
+  const changePassword = async (data: ChangePasswordDto) => {
+    return apiCall("change-password", "POST", data);
+  };
+
   useEffect(() => {
     getProfile();
   }, []);
@@ -133,5 +138,6 @@ export const useAuth = () => {
     verifyResetCode,
     resetPassword,
     getProfile,
+    changePassword,
   };
 };

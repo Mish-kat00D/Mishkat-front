@@ -1,5 +1,6 @@
 import { Clock, Star } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { PiBookOpenText, PiMedal } from 'react-icons/pi'
 import { TbTargetArrow } from 'react-icons/tb'
@@ -134,7 +135,7 @@ const Dashboard = ({ data }: DashboardProps) => {
                   <div className="text-xs flex gap-1 text-neutral-300"><Star className="w-4 h-4 text-secondary-500" />4.5</div>
                 </div>
                 {/* Contenue Button */}
-                <button className="w-full py-1 px-2 mx-1 rounded-full bg-secondary-500 text-white text-xs">Continue Learning</button>
+                <Link href={`/workshop/${workshop.id}`} className="w-full py-1 px-2 mx-1 rounded-full bg-secondary-500 text-white text-xs">Continue Learning</Link>
               </div>
             </div>
           )) : (

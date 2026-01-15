@@ -54,8 +54,8 @@ export default function Footer() {
           <div className="flex flex-1 lg:flex-row flex-col justify-end lg:justify-between gap-8 items-start lg:gap-32">
             {footerLinks.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
-                <h4 className="text-neutral-100 text-base font-semibold">{section.title}</h4>
-                <ul className="flex flex-col md:flex-row lg:flex-col gap-2">
+                <h4 className="text-neutral-100 text-base font-semibold max-lg:text-center">{section.title}</h4>
+                <ul className="flex flex-row flex-wrap justify-center items-center lg:flex-col gap-2">
                   {section.items.map((item) => (
                     <li
                       key={item}
@@ -73,7 +73,7 @@ export default function Footer() {
         <div className="w-full flex flex-col lg:flex-row justify-between items-center gap-2 border-t-2 border-indigo-300/10 pt-4">
           {/* Terms */}
           <div className="flex gap-4 flex-col lg:flex-row text-primary-100 text-xs font-medium items-center">
-            <a href="https://maps.app.goo.gl/MYvwqsGmQG8cWy7w5?g_st=ipc" target="_blank">98 - North Lotus, Area 4, فسم أول القاهرة الجديدة، محافظة القاهرة 4743030</a>
+            <a href="https://maps.app.goo.gl/MYvwqsGmQG8cWy7w5?g_st=ipc" target="_blank" className="flex flex-col gap-2 lg:flex-row max-lg:text-center"><span>98 - North Lotus, Area 4, </span><span>فسم أول القاهرة الجديدة، محافظة القاهرة 4743030</span></a>
             <span className="hidden lg:block"> - </span>
             <a className="flex gap-2 items-center" href="https://wa.me/01033326205" target="_blank">
               <BsWhatsapp className="w-5 h-5" /> +201033326205

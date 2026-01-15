@@ -50,3 +50,8 @@ export interface VerifyResetCodeDto {
 export interface ResetPasswordDto {
   password: string;
 }
+
+export interface ChangePasswordDto {
+  oldPassword: string;
+  newPassword: string;
+}
