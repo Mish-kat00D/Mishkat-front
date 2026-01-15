@@ -3,8 +3,9 @@ import { Calendar, CircleCheck, Clock } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import { GoPeople } from 'react-icons/go'
+import BookButton from './BookButton'
 
-const Hero = ({ workshop }: { workshop: Workshop }) => {
+const Hero = ({ workshop, user, enrolled }: { workshop: Workshop, user: any, enrolled: boolean }) => {
   const {
     title,
     subtitle,
@@ -102,9 +103,7 @@ const Hero = ({ workshop }: { workshop: Workshop }) => {
               </div>
             </div>
           </div>
-          <button className='w-full py-3 px-6 bg-secondary-500 rounded-full text-white font-bold text-lg mt-6 hover:bg-secondary-600 transition-colors'>
-            Book Now
-          </button>
+          <BookButton isUser={!!user} enrolled={enrolled} workshop={workshop} />
         </div>
       </div>
     </div>
