@@ -18,7 +18,7 @@ const WorkshopWatch = ({ sessions }: { sessions: Session }) => {
             {workshop.title}
           </h1>
           <p className="text-neutral-200 text-[20px]">
-            {workshop.description}
+            {workshop.subtitle}
           </p>
         </div>
       </div>

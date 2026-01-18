@@ -61,13 +61,13 @@ const Page = async ({ params }: { params: { id: string, lessonId: string } }) =>
 
   console.log("session data", data)
   return (
-    <main className='container mx-auto flex flex-col justify-start items-center gap-11 px-6 my-4'>
+    <main className='flex flex-col justify-start items-center gap-11'>
       {/* Workshop Watch */}
       <WorkshopWatch sessions={data} />
       {/* Overview */}
       <Overview description={data.workshop.description} />
       {/* Instructor */}
-      <Instructor instructor={data.workshop.instructor} />
+      <Instructor instructor={data.workshop.instructor} videoUrl={data.workshop.videoUrl!} />
       {/* What You'll Learn */}
       <WhatYouWillLearn items={data.workshop.whatYoullMaster} />
       {/* AI Tools You'll Master */}
@@ -79,7 +79,7 @@ const Page = async ({ params }: { params: { id: string, lessonId: string } }) =>
       {/* Schedule */}
       <ScheduleDesign sessions={data.workshop.sessions} />
       {/* Black Friday Offer */}
-      <BlackFridayOfferDesign price={data.workshop.price} originalPrice={data.workshop.originalPrice} currency={data.workshop.currency} />
+      {/* <BlackFridayOfferDesign price={data.workshop.price} originalPrice={data.workshop.originalPrice} currency={data.workshop.currency} workshop={data.workshop} enrolled={data.workshop.enrolled} user={true} /> */}
     </main>
   )
 }

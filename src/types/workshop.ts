@@ -40,8 +40,8 @@ export interface Workshop {
   }[],
   tools: {
     name: string,
-    description: string,
-    logoUrl: string
+    purpose: string,
+    features: string[]
   }[],
   studentResults: {
     imageUrl: string,
@@ -49,8 +49,9 @@ export interface Workshop {
   }[],
   reviews: {
     id: string,
-    name: string,
+    reviewerName: string,
+    reviewerTitle: string,
     rating: number,
-    comment: string,
+    content: string,
   }[]
 }

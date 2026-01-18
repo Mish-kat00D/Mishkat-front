@@ -56,7 +56,7 @@ const Notification = () => {
   const handleChange = (name: string) => (checked: boolean) => {
     const newSettings = { ...settings, [name]: checked }
     setSettings(newSettings)
-    updateSettings(newSettings)
+    updateSettings({ email: newSettings.email, push: newSettings.push, marketing: newSettings.marketing })
   }
 
   return (

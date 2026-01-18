@@ -20,7 +20,7 @@ const ReviewCard = ({ review }: { review: Workshop['reviews'][0] }) => {
     <div className="min-w-[320px] max-w-[380px] flex-shrink-0 rounded-2xl bg-primary-900/20 border border-indigo-300/20 shadow-[0px_4px_20px_rgba(0,0,0,0.35)] px-4 py-6 flex flex-col items-center gap-5">
       {/* Quote */}
       <p className="text-center flex-1 text-neutral-300 text-xl font-medium leading-8">
-        “{review.comment}”
+        “{review.content}”
       </p>
 
       {/* Divider */}
@@ -29,10 +29,10 @@ const ReviewCard = ({ review }: { review: Workshop['reviews'][0] }) => {
       {/* Author */}
       <div className="flex flex-col items-center gap-1">
         <p className="text-white text-lg font-bold">
-          {review.name}
+          {review.reviewerName}
         </p>
         <p className="text-neutral-400 text-sm font-bold">
-          Verified Student
+          {review.reviewerTitle}
         </p>
       </div>
 
@@ -52,7 +52,7 @@ const StudentReviews = ({ reviews }: { reviews: Workshop['reviews'] }) => {
       </h2>
 
       {/* Horizontal Scroll */}
-      <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+      <div className="flex justify-between gap-4 overflow-x-auto no-scrollbar pb-2">
         {reviews.map((review, index) => (
           <ReviewCard key={index} review={review} />
         ))}

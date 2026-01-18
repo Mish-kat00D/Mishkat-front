@@ -42,25 +42,25 @@ export const useInstructors = () => {
     return apiCall(`instructor/${id}`);
   }, []);
 
-  const createInstructor = async (data: any) => {
+  const createInstructor = useCallback(async (data: any) => {
     return apiCall("instructor", {
       method: "POST",
       body: JSON.stringify(data),
     });
-  };
+  }, []);
 
-  const updateInstructor = async (id: string, data: any) => {
+  const updateInstructor = useCallback(async (id: string, data: any) => {
     return apiCall(`instructor/${id}`, {
       method: "PATCH",
       body: JSON.stringify(data),
     });
-  };
+  }, []);
 
-  const deleteInstructor = async (id: string) => {
+  const deleteInstructor = useCallback(async (id: string) => {
     return apiCall(`instructor/${id}`, {
       method: "DELETE",
     });
-  };
+  }, []);
 
   return {
     loading,

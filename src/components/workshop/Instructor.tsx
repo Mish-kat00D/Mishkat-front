@@ -1,7 +1,7 @@
 import { Workshop } from "@/types/workshop";
 import Image from "next/image";
 
-export default function Instructor({ instructor }: { instructor: Workshop['instructor'] }) {
+export default function Instructor({ instructor, videoUrl }: { instructor: Workshop['instructor'], videoUrl?: string }) {
   if (!instructor) return null;
 
   return (
@@ -38,7 +38,6 @@ export default function Instructor({ instructor }: { instructor: Workshop['instr
           {/* Highlights */}
           <ul className="flex flex-col gap-4 text-white/80 text-base">
             <li className="flex gap-3">
-              <span className="text-secondary-500">•</span>
               {instructor.bio}
             </li>
             {instructor.achievements && instructor.achievements.map((achievement) => (
@@ -53,13 +52,7 @@ export default function Instructor({ instructor }: { instructor: Workshop['instr
         {/* Right Image Card */}
         <div className="flex-1 p-6 rounded-3xl bg-primary-1000 border border-cyan-500/30 flex items-center justify-center">
           <div className="relative w-full h-[260px] md:h-[326px] rounded-2xl overflow-hidden">
-            <Image
-              src={instructor.imgUrl || "/instructorVideo.jpg"}
-              alt={instructor.name}
-              fill
-              unoptimized
-              className="object-cover"
-            />
+            <iframe width="100%" height="100%" src={videoUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </div>
         </div>
       </div>

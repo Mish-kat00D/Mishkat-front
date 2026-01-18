@@ -32,7 +32,7 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
   const renderContent = () => {
     switch (view) {
       case 'login':
-        return <LoginForm onSwitchView={handleSwitchView} />;
+        return <LoginForm onSwitchView={handleSwitchView} onClose={onClose} />;
       case 'signup':
         return <SignupForm onSwitchView={handleSwitchView} />;
       case 'forget-password':

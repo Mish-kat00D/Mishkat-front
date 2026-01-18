@@ -1,26 +1,26 @@
 import { Workshop } from '@/types/workshop';
+import { PenTool } from 'lucide-react';
 
 const ToolCard = ({ tool }: { tool: Workshop['tools'][0] }) => {
   return (
     <div className="relative rounded-2xl border border-white/10 glass shadow-md p-6 flex flex-col gap-4 bg-primary-1000">
-      {/* Icon */}
-      <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center shadow-lg">
-        <img
-          src={tool.logoUrl || "https://placehold.co/64x64"}
-          alt={tool.name}
-          className="w-full h-full object-cover rounded-2xl"
-        />
-      </div>
-
       {/* Title */}
-      <h3 className="text-white text-base font-semibold">
+      <h3 className="text-white text-base font-semibold flex items-center gap-2">
+        <PenTool size={24} className="text-secondary-500" />
         {tool.name}
       </h3>
 
-      {/* Description */}
+      {/* Purpose */}
       <p className="text-white/60 text-sm">
-        {tool.description}
+        {tool.purpose}
       </p>
+
+      {/* Features */}
+      <ul className="list-disc list-inside text-white/60 text-sm">
+        {tool.features.map((feature) => (
+          <li key={feature}>{feature}</li>
+        ))}
+      </ul>
     </div>
   );
 };

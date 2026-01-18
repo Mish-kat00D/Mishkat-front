@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
-import NavLogo from '../../../public/NavLogo.png'
+import NavLogo from '../../../public/NavLogo.svg'
 import UserActions from './UserActions';
 import MobileMenu from './MobileMenu';
 

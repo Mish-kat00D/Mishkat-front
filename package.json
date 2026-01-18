@@ -11,14 +11,19 @@
     "start:server": "npm run build && pm2 restart mishkat-frontend"
   },
   "dependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@uiw/react-md-editor": "^4.0.11",
     "hls.js": "^1.6.15",
     "liquid-glass-react": "^1.1.1",
     "lucide-react": "^0.544.0",
+    "markdown-it": "^14.1.0",
     "next": "^15.5.9",
     "react": "^19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
-    "react-switch": "^7.1.0"
+    "react-switch": "^7.1.0",
+    "swr": "^2.3.8",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

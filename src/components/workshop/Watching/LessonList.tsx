@@ -17,7 +17,7 @@ const LessonList = ({
   workshopId: string;
 }) => {
   return (
-    <aside className="w-full lg:w-80 h-[543px] bg-primary-1000 border border-indigo-600/20 rounded-2xl p-4 shadow-[0px_4px_15px_rgba(0,0,0,0.40)] flex flex-col gap-4">
+    <aside className="w-full lg:w-80 h-fit max-h-[543px] bg-primary-1000 border border-indigo-600/20 rounded-2xl p-4 shadow-[0px_4px_15px_rgba(0,0,0,0.40)] flex flex-col gap-4">
       <h3 className="text-white text-lg font-bold">
         Workshop Content
       </h3>

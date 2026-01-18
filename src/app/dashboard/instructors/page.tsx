@@ -70,9 +70,9 @@ export default function InstructorsPage() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
                   {/* Edit functionality can be added later */}
-                  {/* <Link href={`/dashboard/instructors/${instructor.id}/edit`} className="text-indigo-600 hover:text-indigo-900 inline-flex items-center gap-1">
+                  <Link href={`/dashboard/instructors/${instructor.id}/edit`} className="text-indigo-600 hover:text-indigo-900 inline-flex items-center gap-1">
                     <Edit size={16} /> Edit
-                  </Link> */}
+                  </Link>
                   <button onClick={() => handleDelete(instructor.id)} className="text-red-600 hover:text-red-900 inline-flex items-center gap-1">
                     <Trash2 size={16} /> Delete
                   </button>

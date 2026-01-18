@@ -1,12 +1,10 @@
 "use client"
 import { Workshop } from "@/types/workshop";
-import { useState } from "react";
 import GlassAccordion from "../shared/GlassAccordion";
 
 const ScheduleDesign = ({ sessions }: { sessions: Workshop['sessions'] }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   if (!sessions || sessions.length === 0) return null;
+  console.log("sessions", sessions)
 
   return (
     <section className="w-full flex flex-col gap-6">
@@ -18,7 +16,7 @@ const ScheduleDesign = ({ sessions }: { sessions: Workshop['sessions'] }) => {
       {/* Schedule List */}
       <div className="flex flex-col gap-6">
         {sessions.map((session, index) => (
-          <GlassAccordion key={index} name='schedule' title={session.title} content={session.content} />
+          <GlassAccordion key={index} name='schedule' title={`${session.title} - ${session.duration} Minutes`} content={session.content} />
         ))}
       </div>
     </section>

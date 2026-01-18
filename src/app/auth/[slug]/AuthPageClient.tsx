@@ -17,7 +17,7 @@ export default function AuthPageClient({ slug }: { slug: string }) {
 
   switch (slug) {
     case 'login':
-      return <LoginForm onSwitchView={handleSwitchView} />;
+      return <LoginForm onSwitchView={handleSwitchView} onClose={() => router.push('/')} />;
     case 'signup':
       return <SignupForm onSwitchView={handleSwitchView} />;
     case 'forget-password':

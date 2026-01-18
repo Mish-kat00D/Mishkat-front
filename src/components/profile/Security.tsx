@@ -8,7 +8,7 @@ import Switch from 'react-switch'
 import { useRouter } from 'next/navigation'
 
 const Security = () => {
-  const { logout, loading } = useAuth()
+  const { logout, loading, getProfile } = useAuth()
   const [tfa, setTfa] = useState(false)
   const [isLoading, setIsLoading] = useState(loading)
   const [error, setError] = useState<string | null>(null)
@@ -17,6 +17,7 @@ const Security = () => {
 
   const handleLogout = async () => {
     await logout()
+    await getProfile()
     router.push('/')
   }
 
@@ -43,6 +44,24 @@ const Security = () => {
     fetchTfa()
   }, [])
 
+  const updateTfa = async () => {
+    setIsLoading(true)
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/tfa`, {
+        method: 'PUT',
+        credentials: 'include',
+        body: JSON.stringify({ twoFA: tfa })
+      })
+      if (!response.ok) throw new Error('Failed to update TFA status')
+      const data = await response.json()
+      setTfa(data.enabled)
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <>
       <div className='flex flex-col gap-7 items-start w-full'>
@@ -51,6 +70,7 @@ const Security = () => {
           <div className='flex flex-col gap-1'>
             <h1 className='text-neutral-100 text-2xl font-bold'>Security</h1>
             <p className='text-neutral-300 text-base'>Manage your security</p>
+            {error && <p className='text-red-500 text-sm'>{error}</p>}
           </div>
           <button disabled={isLoading} onClick={handleLogout} className='border border-primary-700 hover:border-secondary-50 hover:bg-secondary-50 transition rounded-full px-4 py-2 md:hidden flex items-center justify-center gap-2 text-white disabled:opacity-50'><LiaSignOutAltSolid className='w-4 h-4' />Sign Out</button>
         </div>
@@ -64,7 +84,7 @@ const Security = () => {
             button={
               <Switch
                 checked={tfa}
-                onChange={setTfa}
+                onChange={updateTfa}
                 onColor="#fb5607"
                 onHandleColor="#fff"
                 uncheckedIcon={false}

@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
 // Helper to handle API calls directly for now or move to hook
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -14,7 +17,7 @@ export default function CreateSessionPage({ params }: { params: { slug: string }
 
   const [formData, setFormData] = useState({
     title: "",
-    description: "", // mapped to 'content' in DTO
+    content: "**Write your session content here...**", // mapped to 'content' in DTO
     idx: 1,
     duration: 60,
   });
@@ -26,7 +29,7 @@ export default function CreateSessionPage({ params }: { params: { slug: string }
     return <div className="p-8">Error: Workshop ID missing</div>;
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -59,7 +62,7 @@ export default function CreateSessionPage({ params }: { params: { slug: string }
         credentials: "include", // Essential for generic auth if needed, but endpoint returns cookie
         body: JSON.stringify({
           title: formData.title,
-          content: formData.description,
+          content: formData.content,
           idx: formData.idx,
           duration: formData.duration,
           // content? DTO says content
@@ -157,14 +160,15 @@ export default function CreateSessionPage({ params }: { params: { slug: string }
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Content / Description</label>
-          <textarea
-            name="description"
-            rows={4}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-black focus:border-black"
-            value={formData.description}
-            onChange={handleChange}
-          />
+          <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+          <div data-color-mode="light">
+            <MDEditor
+              value={formData.content}
+              onChange={(val) => setFormData(prev => ({ ...prev, content: val || "" }))}
+              height={200}
+              preview="edit"
+            />
+          </div>
         </div>
 
         <div>

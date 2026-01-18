@@ -4,20 +4,13 @@ import { useWorkshops } from "@/lib/hooks/useWorkshops";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Loader2, Plus } from "lucide-react";
+import { Loader2, Plus, Edit } from "lucide-react";
 
 export default function ManageWorkshopPage() {
   const params = useParams();
   const slug = params.slug as string;
   const router = useRouter();
-  const { getWorkshopBySlug, getSessions, createWorkshop, loading: hookLoading } = useWorkshops(); // createWorkshop for update? No updateWorkshop yet
-
-  // We need update capability in hook. For now, let's implement update here or add to hook.
-  // The hook has 'createWorkshop' but not 'updateWorkshop'. 
-  // I will add updateWorkshop to the hook in a separate step or just fetch here for now.
-  // Let's assume I'll add 'updateWorkshop' to the hook later, or now. 
-  // Actually, I'll update the hook in the same turn if possible, but I can't.
-  // I'll fetch manually for update for now to save turns.
+  const { getWorkshopBySlug, getSessions, createWorkshop, loading: hookLoading } = useWorkshops();
 
   const [workshop, setWorkshop] = useState<any>(null);
   const [sessions, setSessions] = useState<any[]>([]);
@@ -50,6 +43,13 @@ export default function ManageWorkshopPage() {
           <p className="text-gray-500">{workshop.subtitle || "No subtitle"}</p>
         </div>
         <div className="flex gap-3">
+          <Link
+            href={`/dashboard/workshops/${slug}/edit`}
+            className="flex items-center gap-2 bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-50 transition-colors"
+          >
+            <Edit size={18} />
+            Edit Workshop
+          </Link>
           <Link
             href={`/dashboard/workshops/${slug}/sessions/create?workshopId=${workshop.id}`} // Pass ID for session creation
             className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors"
@@ -96,8 +96,9 @@ export default function ManageWorkshopPage() {
                   {session.videoUrl ? <span className="text-green-600">Uploaded</span> : <span className="text-yellow-600">Pending</span>}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  {/* Actions like Edit Session could go here */}
-                  <span className="text-gray-400">Edit</span>
+                  <Link href={`/dashboard/workshops/${slug}/sessions/${session.id}/edit?workshopId=${workshop.id}`} className="text-black hover:text-gray-700">
+                    Edit
+                  </Link>
                 </td>
               </tr>
             ))}

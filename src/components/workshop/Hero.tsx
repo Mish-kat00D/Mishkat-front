@@ -15,6 +15,7 @@ const Hero = ({ workshop, user, enrolled }: { workshop: Workshop, user: any, enr
     originalPrice,
     currency,
     durationHours,
+    sessions,
     // startDate, // TODO: Add to backend
     // endDate,   // TODO: Add to backend
     // seats,     // TODO: Add to backend
@@ -28,17 +29,18 @@ const Hero = ({ workshop, user, enrolled }: { workshop: Workshop, user: any, enr
         <h1 className='text-[40px] font-bold text-white'>{title}</h1>
         <p className='text-neutral-200 text-xl'>{subtitle || workshop.description.split('\n')[0]}</p>
       </div>
-      <div className="flex flex-col lg:flex-row justify-between items-stretch gap-4 w-full">
-        <div className="relative lg:flex-1 max-lg:w-full self-stretch min-h-[543px]">
+      <div className="flex flex-col lg:flex-row justify-between lg:items-stretch gap-6 w-full">
+        <div className="relative lg:flex-1 w-full aspect-video overflow-hidden rounded-2xl">
           <Image
-            src={imageUrl || "/workshop.png"}
+            src={imageUrl || `https://placehold.co/1280x720?text=${title.split(' ').join('+')}&font=Poppins`}
             alt={title}
             fill
             unoptimized
-            className='object-cover rounded-2xl h-full'
+            className='object-cover'
+            priority
           />
         </div>
-        <div className="flex flex-col justify-between items-center max-lg:w-full h-full px-6 py-6 border border-[#3034EB33] shadow-[0_4px_15px_rgba(0,0,0,0.40)] bg-primary-1000 rounded-2xl">
+        <div className="flex flex-col justify-between items-center lg:w-[400px] max-lg:w-full px-6 py-6 border border-[#3034EB33] shadow-[0_4px_15px_rgba(0,0,0,0.40)] bg-primary-1000 rounded-2xl">
           <div className="flex flex-col justify-start items-start gap-6 w-full">
             <div className='flex flex-col justify-start items-start gap-6 w-full'>
               <div className="border-b border-b-secondary-500 pb-4 w-full flex justify-start items-center gap-3">
@@ -61,10 +63,6 @@ const Hero = ({ workshop, user, enrolled }: { workshop: Workshop, user: any, enr
                   <GoPeople className="text-secondary-500 w-5 h-5 flex-shrink-0" />
                   <span className="text-neutral-100 text-sm font-medium">Limited Seats</span>
                 </div>
-                {/* <div className='flex justify-start items-center gap-2'>
-                  <Calendar className="text-secondary-500 w-5 h-5 flex-shrink-0" />
-                  <span className="text-neutral-100 text-sm font-medium">March 15–21</span>
-                </div> */}
                 {durationHours && (
                   <div className='flex justify-start items-center gap-2'>
                     <Clock className="text-secondary-500 w-5 h-5 flex-shrink-0" />
@@ -87,19 +85,23 @@ const Hero = ({ workshop, user, enrolled }: { workshop: Workshop, user: any, enr
             <div className='flex flex-col justify-start items-start gap-3 w-full'>
               <div className='flex justify-start items-center gap-3'>
                 <CircleCheck className='w-5 h-5 text-secondary-500 flex-shrink-0' />
-                <span className='text-base font-medium text-white/80'>{durationHours || 8} hours of content</span>
+                <span className='text-base font-medium text-white/80'>{durationHours} hours of recorded training</span>
               </div>
               <div className='flex justify-start items-center gap-3'>
                 <CircleCheck className='w-5 h-5 text-secondary-500 flex-shrink-0' />
-                <span className='text-base font-medium text-white/80'>Lifetime access</span>
+                <span className='text-base font-medium text-white/80'>{sessions?.length} comprehensive modules</span>
               </div>
               <div className='flex justify-start items-center gap-3'>
                 <CircleCheck className='w-5 h-5 text-secondary-500 flex-shrink-0' />
-                <span className='text-base font-medium text-white/80'>Unreal Engine 5</span>
+                <span className='text-base font-medium text-white/80'>Watch anytime, from anywhere</span>
               </div>
               <div className='flex justify-start items-center gap-3'>
                 <CircleCheck className='w-5 h-5 text-secondary-500 flex-shrink-0' />
-                <span className='text-base font-medium text-white/80'>Private community access</span>
+                <span className='text-base font-medium text-white/80'>Hands-on projects</span>
+              </div>
+              <div className='flex justify-start items-center gap-3'>
+                <CircleCheck className='w-5 h-5 text-secondary-500 flex-shrink-0' />
+                <span className='text-base font-medium text-white/80'>Certificate of completion</span>
               </div>
             </div>
           </div>

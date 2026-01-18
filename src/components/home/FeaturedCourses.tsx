@@ -15,7 +15,7 @@ const FeaturedCourses = () => {
     imageUrl: string | null,
     title: string,
     description: string,
-    tools: string[]
+    tools: { name: string }[]
   }[]>([])
 
   useEffect(() => {
@@ -69,13 +69,13 @@ const CourseCardSkeleton = () => (
   </div>
 )
 
-const CourseCard = ({ image, title, description, tags, slug }: { image: any, title: string, description: string, tags: string[], slug: string }) => {
+const CourseCard = ({ image, title, description, tags, slug }: { image: any, title: string, description: string, tags: { name: string }[], slug: string }) => {
   return (
     <div className="group mobile-hover relative lg:h-[444px] min-h-[390px] w-1/3 min-w-[300px] max-lg:container max-lg:mx-auto overflow-hidden rounded-2xl max-sm:rounded-xl bg-primary-900 shadow-[0px_4px_15px_rgba(0,0,0,0.30)] outline-1 outline-[rgba(172,174,247,0.20)] -outline-offset-1 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] hover:outline-[rgba(172,174,247,0.40)] flex flex-col">
       <div className="relative h-58 image-hover transition-all duration-500 ease-in-out group-hover:h-48 max-sm:h-48 w-full overflow-hidden">
         <Image
           alt="course image"
-          src={image ?? "https://placehold.co/429x287?text=No+Image"}
+          src={image ?? `https://placehold.co/800?text=${title.split(' ').join('+')}&font=Poppins`}
           fill
           unoptimized
           className="object-cover"
@@ -99,7 +99,7 @@ const CourseCard = ({ image, title, description, tags, slug }: { image: any, tit
               key={index}
               className="px-2 py-1 bg-white/10 rounded-full outline-1 outline-white/25 -outline-offset-1 backdrop-blur-[30px] text-white text-xs max-sm:text-xs font-sen leading-tight whitespace-nowrap transition-all duration-500 group-hover:bg-white/20"
             >
-              {tag}
+              {tag.name}
             </span>
           ))}
         </div>

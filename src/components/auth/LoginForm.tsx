@@ -7,11 +7,12 @@ import { useRouter } from "next/navigation";
 
 interface LoginFormProps {
   onSwitchView: (view: 'login' | 'signup' | 'forget-password' | 'verify-code' | 'reset-password' | 'reset-password-success') => void;
+  onClose: () => void;
 }
 
-export default function LoginForm({ onSwitchView }: LoginFormProps) {
+export default function LoginForm({ onSwitchView, onClose }: LoginFormProps) {
   const router = useRouter();
-  const { login, loading, error: authError } = useAuth();
+  const { login, loading, error: authError, getProfile } = useAuth();
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -23,6 +24,8 @@ export default function LoginForm({ onSwitchView }: LoginFormProps) {
     setLocalError(null);
     try {
       await login(form);
+      await getProfile();
+      onClose();
       if (window.location.pathname === "/") {
         window.location.reload();
       } else {

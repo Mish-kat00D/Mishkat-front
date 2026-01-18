@@ -30,13 +30,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
   const data: Workshop & { enrolled: boolean } = await res.json();
   console.log("workshop data", data)
   return (
-    <main className='container mx-auto flex flex-col justify-start items-center gap-11'>
+    <main className='container mx-auto px-4 flex flex-col justify-start items-center gap-11'>
       {/* Hero */}
       <Hero workshop={data} user={user} enrolled={data.enrolled} />
       {/* Overview */}
       <Overview description={data.description} />
       {/* Instructor */}
-      <Instructor instructor={data.instructor} />
+      <Instructor instructor={data.instructor} {...(data.videoUrl && { videoUrl: data.videoUrl })} />
       {/* What You'll Learn */}
       <WhatYouWillLearn items={data.whatYoullMaster} />
       {/* AI Tools You'll Master */}
@@ -52,6 +52,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
         price={data.price}
         originalPrice={data.originalPrice}
         currency={data.currency}
+        workshop={data}
+        enrolled={data.enrolled}
+        user={user}
       />
     </main>
   )

@@ -1,13 +1,40 @@
 import { Instagram, Linkedin, Youtube, Facebook } from "lucide-react"
-import NavLogo from '../../../public/NavLogo.png'
+import NavLogo from '../../../public/NavLogo.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 import { BsWhatsapp } from "react-icons/bs"
+import FooterLink from "./FooterLink"
+import NewsLetter from "./NewsLetter"
 
 const footerLinks = [
   {
     title: "Platform",
-    items: ["About", "Workshops", "Testimonials", "Email Us", "Get Ready", "FAQs"],
+    items: [
+      {
+        name: "About",
+        href: "home"
+      },
+      {
+        name: "Workshops",
+        href: "workshops"
+      },
+      {
+        name: "Testimonials",
+        href: "testimonials"
+      },
+      {
+        name: "Email Us",
+        href: "Email"
+      },
+      {
+        name: "Get Ready",
+        href: "CTA"
+      },
+      {
+        name: "FAQs",
+        href: "FQs"
+      }
+    ],
   },
 ]
 
@@ -32,22 +59,7 @@ export default function Footer() {
               An Arabic-first educational platform merging architecture and artificial
               intelligence to empower the next generation of designers.
             </p>
-
-            <div className="flex flex-col gap-2 px-1 w-full">
-              <span className="text-neutral-100 text-base font-semibold">
-                Subscribe to our newsletter
-              </span>
-              <div className="flex gap-4">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 px-4 py-3 bg-primary-900 rounded-lg outline-1 outline-indigo-300/10 text-neutral-600 text-xs"
-                />
-                <button className="h-9 px-4 bg-secondary-500 rounded-lg text-white text-sm font-medium">
-                  Subscribe
-                </button>
-              </div>
-            </div>
+            <NewsLetter />
           </div>
 
           {/* Footer Links */}
@@ -55,14 +67,9 @@ export default function Footer() {
             {footerLinks.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
                 <h4 className="text-neutral-100 text-base font-semibold max-lg:text-center">{section.title}</h4>
-                <ul className="flex flex-row flex-wrap justify-center items-center lg:flex-col gap-2">
+                <ul className="flex flex-row flex-wrap justify-center items-center lg:items-start lg:flex-col gap-2">
                   {section.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-neutral-300 text-base font-semibold cursor-pointer hover:text-white transition"
-                    >
-                      {item}
-                    </li>
+                    <FooterLink key={item.name} item={item} />
                   ))}
                 </ul>
               </div>

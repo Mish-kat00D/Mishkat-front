@@ -99,6 +99,12 @@
   --font-mono: var(--font-sen-mono);
 }
 
+:root {
+  color-scheme: dark;
+  --background: var(--color-primary-1000);
+  --foreground: var(--color-neutral-500);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--color-primary-1000);
@@ -106,20 +112,35 @@
   }
 }
 
+html,
+body {
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  background-image: url('../../public/bg-2.png');
-  background-repeat: repeat;
-  background-attachment: scroll;
-  background-size: contain;
   color: var(--foreground);
   font-family: 'Sen', sans-serif;
-}
 
+  /* Fallback color ALWAYS first */
+  background-color: var(--background);
+
+  /* Then image */
+  background-image: url('/bg.avif'), url('/bg.webp'), url('/bg-3.png');
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+  background-attachment: scroll;
+}
+@media (max-width: 768px) {
+  body {
+    background-position: top center;
+  }
+}
 .glass {
   background-color: color-mix(in srgb, var(--color-primary-900), transparent 80%);
   border: 1px solid color-mix(in srgb, var(--color-indigo-300), transparent 80%);

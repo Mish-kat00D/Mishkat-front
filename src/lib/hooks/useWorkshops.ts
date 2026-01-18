@@ -46,34 +46,67 @@ export const useWorkshops = () => {
     return apiCall("workshops");
   }, []);
 
-  const createWorkshop = async (data: any) => {
+  const createWorkshop = useCallback(async (data: any) => {
     return apiCall("workshops", {
       method: "POST",
       body: JSON.stringify(data),
     });
-  };
+  }, []);
 
-  const deleteWorkshop = async (id: string) => {
+  const deleteWorkshop = useCallback(async (id: string) => {
     return apiCall(`workshops/${id}`, {
       method: "DELETE",
     });
-  };
+  }, []);
 
-    const getWorkshopBySlug = async (slug: string) => {
+  const updateWorkshop = useCallback(async (id: string, data: any) => {
+    return apiCall(`workshops/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+  }, []);
+
+    const getWorkshopBySlug = useCallback(async (slug: string) => {
         return apiCall(`workshops/${slug}`);
-    }
+    }, []);
 
-    const getSessions = async (workshopId: string) => {
+    const getSessions = useCallback(async (workshopId: string) => {
         return apiCall(`workshop/${workshopId}/session`);
-    }
+    }, []);
+
+    const getSession = useCallback(async (workshopId: string, sessionId: string) => {
+        return apiCall(`workshop/${workshopId}/session/${sessionId}`);
+    }, []);
+
+    const updateSession = useCallback(async (workshopId: string, sessionId: string, data: any) => {
+        return apiCall(`workshop/${workshopId}/session/${sessionId}`, {
+            method: "PATCH",
+            body: JSON.stringify(data),
+        });
+    }, []);
+
+    const deleteSession = useCallback(async (workshopId: string, sessionId: string) => {
+        return apiCall(`workshop/${workshopId}/session/${sessionId}`, {
+            method: "DELETE",
+        });
+    }, []);
+
+    const getSessionUploadUrl = useCallback(async (workshopId: string, sessionId: string) => {
+         return apiCall(`workshop/${workshopId}/session/${sessionId}/upload-url`);
+    }, []);
 
   return {
     loading,
     error,
     getWorkshops,
     createWorkshop,
+    updateWorkshop,
     deleteWorkshop,
     getWorkshopBySlug,
-    getSessions
+    getSessions,
+    getSession,
+    updateSession,
+    deleteSession,
+    getSessionUploadUrl
   };
 };
