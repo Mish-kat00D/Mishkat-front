@@ -71,8 +71,8 @@ const CourseCardSkeleton = () => (
 
 const CourseCard = ({ image, title, description, tags, slug }: { image: any, title: string, description: string, tags: { name: string }[], slug: string }) => {
   return (
-    <div className="group mobile-hover relative lg:h-[444px] min-h-[390px] w-1/3 min-w-[300px] max-lg:container max-lg:mx-auto overflow-hidden rounded-2xl max-sm:rounded-xl bg-primary-900 shadow-[0px_4px_15px_rgba(0,0,0,0.30)] outline-1 outline-[rgba(172,174,247,0.20)] -outline-offset-1 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] hover:outline-[rgba(172,174,247,0.40)] flex flex-col">
-      <div className="relative h-58 image-hover transition-all duration-500 ease-in-out max-sm:h-48 w-full overflow-hidden">
+    <div className="group mobile-hover relative h-[420px] w-[320px] max-sm:w-[300px] max-sm:h-[400px] flex-shrink-0 overflow-hidden rounded-2xl max-sm:rounded-xl bg-primary-900 shadow-[0px_4px_15px_rgba(0,0,0,0.30)] outline-1 outline-[rgba(172,174,247,0.20)] -outline-offset-1 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] hover:outline-[rgba(172,174,247,0.40)] flex flex-col">
+      <div className="relative aspect-video image-hover transition-all duration-500 ease-in-out w-full overflow-hidden flex-shrink-0">
         <Image
           alt="course image"
           src={image ?? `https://placehold.co/800?text=${title.split(' ').join('+')}&font=Poppins`}

@@ -197,7 +197,7 @@ const Dashboard = () => {
                   </div>
                   <Link
                     href={workshop.nextSessionId
-                      ? `/workshop/${workshop.slug}/watch/${workshop.nextSessionId}`
+                      ? `/workshop/${workshop.id}/watch/${workshop.nextSessionId}`
                       : `/workshop/${workshop.slug}`
                     }
                     className="w-full py-1 px-2 mx-1 rounded-full bg-secondary-500 text-white text-xs font-semibold text-center"
