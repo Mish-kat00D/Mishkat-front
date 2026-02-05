@@ -12,27 +12,27 @@ const footerLinks = [
     items: [
       {
         name: "About",
-        href: "home"
+        href: "/#"
       },
       {
         name: "Workshops",
-        href: "workshops"
+        href: "/#workshops"
       },
       {
         name: "Testimonials",
-        href: "testimonials"
+        href: "/#testimonials"
       },
       {
         name: "Email Us",
-        href: "Email"
-      },
-      {
-        name: "Get Ready",
-        href: "CTA"
+        href: "/#Email"
       },
       {
         name: "FAQs",
-        href: "FQs"
+        href: "/#FQs"
+      },
+      {
+        name: "Get Ready",
+        href: "/#CTA"
       }
     ],
   },

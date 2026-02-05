@@ -10,8 +10,8 @@ export default function Home() {
       <FeaturedCourses />
       <Testimonials />
       <Email />
-      <CTA />
       <FQs />
+      <CTA />
     </main>
   );
 }

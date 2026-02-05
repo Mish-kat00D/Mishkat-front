@@ -52,7 +52,7 @@ export default function Instructor({ instructor, videoUrl }: { instructor: Works
         {/* Right Image Card */}
         <div className="flex-1 p-6 rounded-3xl bg-primary-1000 border border-cyan-500/30 flex items-center justify-center">
           <div className="relative w-full h-[260px] md:h-[326px] rounded-2xl overflow-hidden">
-            <iframe width="100%" height="100%" src={videoUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            <iframe className="w-full aspect-video" src={videoUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </div>
         </div>
       </div>

@@ -23,13 +23,13 @@ const UserActions = () => {
         <Skeleton className="h-10 w-40 inline-flex justify-end items-center gap-4" />
         : user ? (
           <div className="flex justify-end items-center gap-4">
-            <div className="p-2 bg-Primary-900 rounded-lg outline-1 outline-offset-[-1px] outline-indigo-300/20 flex justify-start items-center gap-2">
+            {/* <div className="p-2 bg-Primary-900 rounded-lg outline-1 outline-offset-[-1px] outline-indigo-300/20 flex justify-start items-center gap-2">
               <div className="w-8 h-8 flex justify-center items-center">
                 <IoNotifications className='text-white hover:text-secondary-500 w-6 h-6' />
               </div>
-            </div>
+            </div> */}
             <Link href="/profile" className="flex justify-start items-center gap-2">
-              <Image alt='Profile' className="w-12 h-12 rounded-full" width={48} height={48} unoptimized src={user.profileImageUrl ?? "https://placehold.co/48x48"}></Image>
+              <Image alt='Profile' className="w-12 h-12 rounded-full object-cover" width={48} height={48} unoptimized src={user.profileImageUrl ?? "https://placehold.co/48x48"}></Image>
             </Link>
           </div>
         ) : (

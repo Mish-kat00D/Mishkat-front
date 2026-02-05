@@ -55,13 +55,13 @@ const SignupForm = ({ onSwitchView }: SignupFormProps) => {
       </div>
 
       {/* Google Auth */}
-      <button
-        type="button"
+      <Link
+        href={`${process.env.NEXT_PUBLIC_API_URL ?? 'https://mish-kat.org/api'}/auth/google`}
         className="mb-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary-1000 px-4 py-2 shadow-md outline-1 outline-indigo-600/20 transition hover:bg-primary-900"
       >
         <Image src="/Google.svg" alt="Google Logo" width={32} height={32} />
         <span className="text-base font-bold text-neutral-200">Continue with Google</span>
-      </button>
+      </Link>
 
       {/* Divider */}
       <div className="mb-4 flex items-center gap-2">

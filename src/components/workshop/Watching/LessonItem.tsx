@@ -1,15 +1,10 @@
+import { formatDuration } from "@/lib/utils";
 import Link from "next/link";
 
 type Lesson = {
   id: string;
   title: string;
   duration: number;
-};
-
-const formatDuration = (seconds: number) => {
-  const min = Math.floor(seconds / 60);
-  const sec = seconds % 60;
-  return `${min}:${sec.toString().padStart(2, "0")}`;
 };
 
 const LessonItem = ({

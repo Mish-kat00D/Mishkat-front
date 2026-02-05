@@ -27,7 +27,6 @@ const Hero = ({ workshop, user, enrolled }: { workshop: Workshop, user: any, enr
     <div className="flex flex-col justify-start items-center gap-6 w-full my-4">
       <div className="flex flex-col justify-start items-start gap-2 w-full">
         <h1 className='text-[40px] font-bold text-white'>{title}</h1>
-        <p className='text-neutral-200 text-xl'>{subtitle || workshop.description.split('\n')[0]}</p>
       </div>
       <div className="flex flex-col lg:flex-row justify-between lg:items-stretch gap-6 w-full">
         <div className="relative lg:flex-1 w-full aspect-video overflow-hidden rounded-2xl">
@@ -36,7 +35,7 @@ const Hero = ({ workshop, user, enrolled }: { workshop: Workshop, user: any, enr
             alt={title}
             fill
             unoptimized
-            className='object-cover'
+            className='object-cover aspect-video'
             priority
           />
         </div>

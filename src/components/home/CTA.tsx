@@ -7,7 +7,7 @@ const CTA = () => {
       <div className='relative container! mx-auto px-4 h-max! glass flex! flex-col! items-center gap-8 p-7!'>
         {/* Title + Subtitle */}
         <div className="flex flex-col items-center gap-4 text-center md:max-w-1/2">
-          <h2 className="text-white text-5xl font-bold">
+          <h2 className="text-white text-5xl font-bold leading-10">
             Ready to Transform Your Design Career?
           </h2>
           <p className="text-neutral-300 text-2xl font-medium leading-9">

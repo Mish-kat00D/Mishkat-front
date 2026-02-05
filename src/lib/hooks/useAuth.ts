@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import {
   RegisterDto,
   RegisterResponseDto,
@@ -16,9 +16,37 @@ import {
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
+// Singleton auth store - shared across all useAuth instances
+type AuthState = {
+  user: UserResponseDto | null;
+  loading: boolean;
+};
+
+let authState: AuthState = {
+  user: null,
+  loading: true,
+};
+
+const listeners = new Set<() => void>();
+
+const setAuthState = (newState: Partial<AuthState>) => {
+  authState = { ...authState, ...newState };
+  listeners.forEach((listener) => listener());
+};
+
+const subscribe = (listener: () => void) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+
+const getSnapshot = () => authState;
+const getServerSnapshot = () => ({ user: null, loading: true });
+
+// Flag to prevent multiple profile fetches
+let profileFetched = false;
+
 export const useAuth = () => {
-  const [user, setUser] = useState<UserResponseDto | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [error, setError] = useState<string | null>(null);
 
   const apiCall = async <T>(
@@ -26,7 +54,6 @@ export const useAuth = () => {
     method: "GET" | "POST" = "GET",
     body?: any
   ): Promise<T> => {
-    setLoading(true);
     setError(null);
 
     try {
@@ -48,18 +75,17 @@ export const useAuth = () => {
     } catch (err: any) {
       setError(err.message || "Something went wrong");
       throw err;
-    } finally {
-      setLoading(false);
     }
   };
 
   const getProfile = useCallback(async () => {
+    setAuthState({ loading: true });
     try {
       const userData = await apiCall<UserResponseDto>("profile", "GET");
-      setUser(userData);
+      setAuthState({ user: userData, loading: false });
       return userData;
     } catch (err) {
-      setUser(null);
+      setAuthState({ user: null, loading: false });
       console.error("Failed to load profile:", err);
     }
   }, []);
@@ -78,13 +104,14 @@ export const useAuth = () => {
       "POST",
       data
     );
-    setUser(res.user);
+    setAuthState({ user: res.user });
     return res;
   };
 
   const logout = async (): Promise<void> => {
     await apiCall("logout", "POST");
-    setUser(null);
+    setAuthState({ user: null });
+    profileFetched = false; // Allow re-fetch on next login
   };
 
   const verifyEmail = async (token: string): Promise<void> => {
@@ -120,13 +147,17 @@ export const useAuth = () => {
     return apiCall("change-password", "POST", data);
   };
 
+  // Fetch profile only once across all instances
   useEffect(() => {
-    getProfile();
-  }, []);
+    if (!profileFetched) {
+      profileFetched = true;
+      getProfile();
+    }
+  }, [getProfile]);
 
   return {
-    user,
-    loading,
+    user: state.user,
+    loading: state.loading,
     error,
     register,
     login,

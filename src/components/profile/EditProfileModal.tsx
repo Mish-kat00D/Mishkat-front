@@ -68,9 +68,19 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
 
     try {
       const data = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value) {
+
+      // Required fields
+      data.append('name', formData.name);
+      data.append('email', formData.email);
+
+      // Optional fields: send null for empty, otherwise send value
+      const optionalFields = ['title', 'company', 'bio', 'location', 'website', 'phone'] as const;
+      optionalFields.forEach((key) => {
+        const value = formData[key];
+        if (value && value.trim() !== '') {
           data.append(key, value);
+        } else {
+          data.append(key, 'null'); // Will be parsed as null by backend
         }
       });
 
@@ -222,6 +232,17 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                 value={formData.website}
                 onChange={handleChange}
                 placeholder="https://..."
+                className="p-3 rounded-xl border border-gray-200 dark:border-primary-700 bg-transparent dark:text-white focus:ring-2 focus:ring-secondary-500 outline-none transition"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium dark:text-neutral-300">Phone</label>
+              <input
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="e.g. +20 1234567890"
                 className="p-3 rounded-xl border border-gray-200 dark:border-primary-700 bg-transparent dark:text-white focus:ring-2 focus:ring-secondary-500 outline-none transition"
               />
             </div>

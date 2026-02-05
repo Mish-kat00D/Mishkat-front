@@ -1,69 +1,42 @@
-"use client"
 import {
   WorkshopWatch,
   AiToolsYouWillMaster,
   Instructor,
   Overview,
-  ScheduleDesign,
   StudentReviews,
   WhatYouWillLearn,
   WorkshopResults,
-  BlackFridayOfferDesign
 } from '@/components/workshop'
 import { Session } from '@/types/session';
-import { useEffect, useState } from 'react'
+import { cookies } from 'next/headers';
 
-const Page = async ({ params }: { params: { id: string, lessonId: string } }) => {
-  const [data, setData] = useState<Session | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+async function getSessionData(workshopId: string, lessonId: string): Promise<Session> {
+  const cookieHeader = cookies().toString();
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/workshop/${params.id}/session/${params.lessonId}`
-  useEffect(() => {
-
-    const fetchSessions = async () => {
-      setLoading(true)
-      const res = await fetch(url, { credentials: "include" })
-
-      if (!res.ok) {
-        const error = await res.json();
-        console.log(error)
-        setLoading(false)
-        setError(error.message)
-        return
-      }
-
-      const data = await res.json()
-
-      if (!data) {
-        setLoading(false)
-        setError("No data found")
-        return
-      }
-
-      setData(data)
-      setLoading(false)
+  const res = await fetch(
+    `${process.env.API_URL}/workshop/${workshopId}/session/${lessonId}`,
+    {
+      headers: { Cookie: cookieHeader },
+      cache: 'no-store',
     }
-    fetchSessions()
-  }, [url])
+  );
 
-  if (loading) {
-    return <div>Loading...</div>
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || 'Failed to fetch session data');
   }
 
-  if (error) {
-    return <div>{error}</div>
-  }
+  return res.json();
+}
 
-  if (!data) {
-    return <div>No data found</div>
-  }
+const Page = async ({ params }: { params: { id: string; lessonId: string } }) => {
+  const data = await getSessionData(params.id, params.lessonId);
 
-  console.log("session data", data)
   return (
     <main className='flex flex-col justify-start items-center gap-11'>
-      {/* Workshop Watch */}
-      <WorkshopWatch sessions={data} />
+      {/* Workshop Watch - fetches its own data client-side */}
+      <WorkshopWatch workshopId={params.id} lessonId={params.lessonId} />
       {/* Overview */}
       <Overview description={data.workshop.description} />
       {/* Instructor */}
@@ -76,12 +49,8 @@ const Page = async ({ params }: { params: { id: string, lessonId: string } }) =>
       <StudentReviews reviews={data.workshop.reviews} />
       {/* Workshop Results */}
       <WorkshopResults results={data.workshop.studentResults} />
-      {/* Schedule */}
-      <ScheduleDesign sessions={data.workshop.sessions} />
-      {/* Black Friday Offer */}
-      {/* <BlackFridayOfferDesign price={data.workshop.price} originalPrice={data.workshop.originalPrice} currency={data.workshop.currency} workshop={data.workshop} enrolled={data.workshop.enrolled} user={true} /> */}
     </main>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

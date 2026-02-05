@@ -1,4 +1,5 @@
-import { getUser } from '@/lib/server/user'
+"use client"
+import { useAuth } from '@/lib/hooks/useAuth'
 import React from 'react'
 
 interface InfoProps {
@@ -11,7 +12,8 @@ interface InfoProps {
 }
 
 const Info = async () => {
-  const user: InfoProps | null = await getUser()
+  const { user: clientUser } = useAuth()
+  const user: InfoProps | null = clientUser
   if (!user) return null
 
   user.createdAt = new Date(user.createdAt).toLocaleDateString()

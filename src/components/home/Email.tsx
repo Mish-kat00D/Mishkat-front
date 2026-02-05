@@ -57,7 +57,7 @@ const Email = () => {
       <div className='relative container! mx-auto px-4 h-max! glass flex! flex-col! items-center gap-8 p-7!'>
         <div className="flex flex-col justify-evenly items-center gap-8">
           <div className="text-center text-white text-4xl font-bold leading-10">
-            Share your email to be updated with upcoming offers.
+            Get updates on upcoming offers.
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 w-full max-w-2xl">

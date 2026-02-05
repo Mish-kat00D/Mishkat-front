@@ -47,12 +47,12 @@ const StudentReviews = ({ reviews }: { reviews: Workshop['reviews'] }) => {
   return (
     <section className="w-full flex flex-col gap-6">
       {/* Title */}
-      <h2 className="text-white text-[32px] font-bold leading-[48px]">
+      <h2 className="text-white text-[32px] text-center font-bold leading-[48px]">
         What Our Students Say
       </h2>
 
       {/* Horizontal Scroll */}
-      <div className="flex justify-between gap-4 overflow-x-auto no-scrollbar pb-2">
+      <div className="flex justify-evenly gap-4 overflow-x-auto no-scrollbar pb-2">
         {reviews.map((review, index) => (
           <ReviewCard key={index} review={review} />
         ))}

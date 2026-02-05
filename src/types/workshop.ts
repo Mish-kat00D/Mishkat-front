@@ -55,3 +55,17 @@ export interface Workshop {
     content: string,
   }[]
 }
+
+// Session info for redirect tracking
+export interface SessionInfo {
+  id: string;
+  idx: number;
+  title: string;
+}
+
+// Extended workshop with user enrollment data
+export interface WorkshopWithUserData extends Workshop {
+  enrolled: boolean;
+  lastSession: SessionInfo | null;
+  nextSession: SessionInfo | null;
+}

@@ -30,7 +30,7 @@ const Testimonials = () => {
   return (
     <section id='testimonials' className="w-full mt-20 md:mt-32 p-4">
       <div className="container mx-auto flex flex-col justify-start items-center gap-y-8">
-        <SectionHeader title="What Our Students Say" description="Hear from designers who have transformed their practice with Mishkat's workshops." />
+        <SectionHeader title="What Our Designers Say" description="Hear from designers who have transformed their practice with Mishkat's workshops." />
         <div className="flex items-center gap-4 justify-between flex-nowrap max-w-full overflow-x-auto no-scrollbar">
           {Reviews.map((review, index) => (
             <ReviewCard key={index} comment={review.comment} name={review.name} title={review.title} stars={review.stars} />

@@ -30,6 +30,7 @@ export interface UserResponseDto {
     profileImageUrl: string | null;
     coverImageUrl: string | null;
     twoFA: boolean;
+    createdAt: string;
 }
 
 export interface AuthResponseDto {

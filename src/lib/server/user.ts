@@ -13,15 +13,3 @@ export async function getUser() {
   return res.json();
 }
 
-export async function getDashboardStats() {
-  const cookieHeader = cookies().toString();
-
-  const url = `${process.env.API_URL ?? "https://mish-kat.org/api"}/profile/dashboard`
-  const res = await fetch(url, {
-    headers: { Cookie: cookieHeader },
-    cache: "no-store",
-  });
-
-  if (!res.ok) return null;
-  return res.json();
-}

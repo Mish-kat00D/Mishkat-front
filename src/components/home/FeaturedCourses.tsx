@@ -72,7 +72,7 @@ const CourseCardSkeleton = () => (
 const CourseCard = ({ image, title, description, tags, slug }: { image: any, title: string, description: string, tags: { name: string }[], slug: string }) => {
   return (
     <div className="group mobile-hover relative lg:h-[444px] min-h-[390px] w-1/3 min-w-[300px] max-lg:container max-lg:mx-auto overflow-hidden rounded-2xl max-sm:rounded-xl bg-primary-900 shadow-[0px_4px_15px_rgba(0,0,0,0.30)] outline-1 outline-[rgba(172,174,247,0.20)] -outline-offset-1 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] hover:outline-[rgba(172,174,247,0.40)] flex flex-col">
-      <div className="relative h-58 image-hover transition-all duration-500 ease-in-out group-hover:h-48 max-sm:h-48 w-full overflow-hidden">
+      <div className="relative h-58 image-hover transition-all duration-500 ease-in-out max-sm:h-48 w-full overflow-hidden">
         <Image
           alt="course image"
           src={image ?? `https://placehold.co/800?text=${title.split(' ').join('+')}&font=Poppins`}
@@ -83,7 +83,7 @@ const CourseCard = ({ image, title, description, tags, slug }: { image: any, tit
         />
       </div>
 
-      <div className="relative z-10 content-hover md:p-6 p-4 flex flex-col justify-between items-start transition-all duration-500 ease-in-out group-hover:-translate-y-4 md:group-hover:-translate-y-4 flex-1">
+      <div className="relative z-10 content-hover md:p-6 p-4 flex flex-col justify-between items-start flex-1">
         <div className="flex flex-col">
           <h3 className="text-white text-xl max-sm:text-lg font-sen font-bold mb-2 line-clamp-2">
             {title}
@@ -93,7 +93,7 @@ const CourseCard = ({ image, title, description, tags, slug }: { image: any, tit
           </p>
         </div>
 
-        <div className="flex flex-nowrap gap-2 tags-hover max-sm:gap-1 transition-all duration-500 ease-in-out group-hover:-translate-y-8">
+        <div className="flex flex-nowrap gap-2 tags-hover max-sm:gap-1 mb-4">
           {tags.map((tag, index) => (
             <span
               key={index}
@@ -103,11 +103,9 @@ const CourseCard = ({ image, title, description, tags, slug }: { image: any, tit
             </span>
           ))}
         </div>
-      </div>
 
-      <div className="pointer-events-none absolute inset-x-0 p-4 bottom-0 z-20 max-sm:p-2">
-        <Link href={`/workshop/${slug}`} className="pointer-events-auto cta-hover w-full flex items-center justify-center gap-2 rounded-full bg-secondary-500 px-5 py-3 max-sm:py-2 font-sen font-medium max-sm:text-sm text-white transition-all duration-500 ease-in-out translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-secondary-600 hover:shadow-lg active:transform active:scale-95">
-          <FaAngleRight className="text-white font-extralight transition-transform duration-500 ease-in-out group-hover:translate-x-1" />
+        <Link href={`/workshop/${slug}`} className="w-full flex items-center justify-center gap-2 rounded-full bg-secondary-500 px-5 py-3 max-sm:py-2 font-sen font-medium max-sm:text-sm text-white transition-all duration-300 hover:bg-secondary-600 hover:shadow-lg active:transform active:scale-95">
+          <FaAngleRight className="text-white font-extralight transition-transform duration-300 group-hover:translate-x-1" />
           Explore
         </Link>
       </div>

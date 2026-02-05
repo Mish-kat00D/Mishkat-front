@@ -10,9 +10,10 @@ import {
   BlackFridayOfferDesign
 } from '@/components/workshop'
 import { getUser } from '@/lib/server/user'
-import { Workshop } from '@/types/workshop'
+import { WorkshopWithUserData } from '@/types/workshop'
 import React from 'react'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const user = await getUser()
@@ -27,8 +28,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
     console.log("workshop data", (await res.json()).message)
     throw new Error('Failed to fetch workshop data')
   }
-  const data: Workshop & { enrolled: boolean } = await res.json();
+  const data: WorkshopWithUserData = await res.json();
   console.log("workshop data", data)
+
+  // Redirect enrolled users to their next session
+  if (user && data.enrolled && data.nextSession) {
+    redirect(`/workshop/${data.id}/watch/${data.nextSession.id}`);
+  }
   return (
     <main className='container mx-auto px-4 flex flex-col justify-start items-center gap-11'>
       {/* Hero */}

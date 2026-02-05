@@ -1,6 +1,7 @@
 "use client"
 import { Workshop } from "@/types/workshop";
 import GlassAccordion from "../shared/GlassAccordion";
+import { formatDuration } from "@/lib/utils";
 
 const ScheduleDesign = ({ sessions }: { sessions: Workshop['sessions'] }) => {
   if (!sessions || sessions.length === 0) return null;
@@ -16,7 +17,7 @@ const ScheduleDesign = ({ sessions }: { sessions: Workshop['sessions'] }) => {
       {/* Schedule List */}
       <div className="flex flex-col gap-6">
         {sessions.map((session, index) => (
-          <GlassAccordion key={index} name='schedule' title={`${session.title} - ${session.duration} Minutes`} content={session.content} />
+          <GlassAccordion key={index} name='schedule' title={`${session.title} - ${formatDuration(session.duration!)}`} content={session.content} />
         ))}
       </div>
     </section>

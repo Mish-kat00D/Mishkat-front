@@ -10,11 +10,11 @@ const Hero = () => {
             <span className='w-8 h-1 bg-secondary-500'></span>
             <p className='text-secondary-500 text-lg'>MISHKAT PLATFORM</p>
           </div>
-          <h1 className='text-4xl md:text-6xl text-white font-bold max-md:text-center'>Empowering Arab Designers to Lead the Creative World</h1>
+          <h1 className='text-4xl md:text-6xl text-white font-bold max-md:text-center'>Empowering Arab Designers <br /> to Lead the Creative World</h1>
           <p className='text-xl text-neutral-400 max-md:text-center'>Join interactive workshops and courses across all design disciplines</p>
-          <div className="flex justify-start items-center max-md:flex-col max-md:justify-center max-md:w-full">
+          {/* <div className="flex justify-start items-center max-md:flex-col max-md:justify-center max-md:w-full">
             <ExploreMoreButton />
-          </div>
+          </div> */}
         </div>
       </section>
     </>
